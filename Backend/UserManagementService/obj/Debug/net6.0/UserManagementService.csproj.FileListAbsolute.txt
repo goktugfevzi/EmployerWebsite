@@ -1,0 +1,12 @@
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\UserManagementService.csproj.AssemblyReference.cache
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\UserManagementService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\UserManagementService.AssemblyInfoInputs.cache
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\UserManagementService.AssemblyInfo.cs
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\UserManagementService.csproj.CoreCompileInputs.cache
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\bin\Debug\net6.0\UserManagementService.deps.json
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\bin\Debug\net6.0\UserManagementService.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\bin\Debug\net6.0\UserManagementService.pdb
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\UserManagementService.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\refint\UserManagementService.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\UserManagementService.pdb
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\UserManagementService\obj\Debug\net6.0\ref\UserManagementService.dll

@@ -157,3 +157,15 @@ C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.
 C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\libman.json
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\obj\Debug\net6.0\Backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\MailKit.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\MimeKit.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\NETCore.MailKit.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\UserManagementService.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\Backend\bin\Debug\net6.0\UserManagementService.pdb

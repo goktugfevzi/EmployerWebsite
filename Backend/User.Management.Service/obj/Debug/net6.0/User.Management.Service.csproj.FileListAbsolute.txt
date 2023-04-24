@@ -1,0 +1,12 @@
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\bin\Debug\net6.0\User.Management.Service.deps.json
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\bin\Debug\net6.0\User.Management.Service.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\bin\Debug\net6.0\User.Management.Service.pdb
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\User.Management.Service.csproj.AssemblyReference.cache
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\User.Management.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\User.Management.Service.AssemblyInfoInputs.cache
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\User.Management.Service.AssemblyInfo.cs
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\User.Management.Service.csproj.CoreCompileInputs.cache
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\User.Management.Service.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\refint\User.Management.Service.dll
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\User.Management.Service.pdb
+C:\Users\esesl\source\repos\Job-Search-Ts-DotNet\Backend\User.Management.Service\obj\Debug\net6.0\ref\User.Management.Service.dll

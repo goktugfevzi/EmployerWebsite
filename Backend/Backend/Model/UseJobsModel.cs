@@ -15,9 +15,6 @@ namespace Backend.Model
         [ForeignKey("Job")]
         public int JobID { get; set; }
 
-        public virtual User User { get; set; }
         public bool status { get; set; }
-
-        public virtual Job Job { get; set; }
     }
 }

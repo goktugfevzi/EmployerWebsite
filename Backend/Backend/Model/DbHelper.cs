@@ -1,6 +1,5 @@
 ﻿using Backend.EfCore;
 using Microsoft.EntityFrameworkCore;
-
 namespace Backend.Model
 {
     public class DbHelper
