@@ -9,7 +9,7 @@ namespace Backend.EfCore
 
         [Key]
         public int Id { get; set; }
-        [ForeignKey("User")]
+        [ForeignKey("AspNetUsers")]
         public int UserID { get; set; }
         [ForeignKey("Job")]
         public int JobID { get; set; }

@@ -2,8 +2,6 @@ using Backend.EfCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using UserManagementService.Models;
@@ -26,6 +24,18 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+    };
 });
 
 
@@ -35,15 +45,19 @@ builder.Services.AddSingleton(emailConfig);
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 
+//Add Config for Required Email
+builder.Services.Configure<IdentityOptions>(
+    opts => opts.SignIn.RequireConfirmedEmail = true
+    );
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(26));
 
 
 
 
 
 
-
-
-
+///APP BUILDER AREA
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -56,6 +70,8 @@ app.UseCors(options =>
     .AllowAnyMethod()
     .AllowAnyHeader();
 });
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

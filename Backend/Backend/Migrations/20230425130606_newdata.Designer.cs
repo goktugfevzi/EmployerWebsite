@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(EF_DataContext))]
-    [Migration("20230424120443_adsvsdfvsd")]
-    partial class adsvsdfvsd
+    [Migration("20230425130606_newdata")]
+    partial class newdata
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,45 +62,6 @@ namespace Backend.Migrations
                     b.ToTable("Job");
                 });
 
-            modelBuilder.Entity("Backend.EfCore.User", b =>
-                {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserID"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("HasJob")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("JobFinished")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("isAdmin")
-                        .HasColumnType("boolean");
-
-                    b.HasKey("UserID");
-
-                    b.ToTable("User");
-                });
-
             modelBuilder.Entity("Backend.EfCore.UserJobs", b =>
                 {
                     b.Property<int>("Id")
@@ -110,9 +71,6 @@ namespace Backend.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("JobID")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserID")
                         .HasColumnType("integer");
 
                     b.Property<bool>("status")
@@ -151,17 +109,17 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "44ce3878-9288-419e-8e7a-f2af7e6401d3",
+                            Id = "56c62f39-2d45-469c-9c95-00719ebd9c03",
                             ConcurrencyStamp = "1",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
+                            Name = "ADMIN",
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1b7db727-f9fc-4991-be41-e0d66f3cd20a",
+                            Id = "7e37c10b-ccef-445f-aecf-c3cb57a8811b",
                             ConcurrencyStamp = "2",
-                            Name = "User",
-                            NormalizedName = "User"
+                            Name = "USER",
+                            NormalizedName = "USER"
                         });
                 });
 

@@ -9,35 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class adsvsdfvsd : Migration
+    public partial class newdata : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_UserJobs",
-                table: "UserJobs");
-
-            migrationBuilder.AddColumn<int>(
-                name: "Id",
-                table: "UserJobs",
-                type: "integer",
-                nullable: false,
-                defaultValue: 0)
-                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            migrationBuilder.AddColumn<bool>(
-                name: "status",
-                table: "UserJobs",
-                type: "boolean",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_UserJobs",
-                table: "UserJobs",
-                column: "Id");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -75,6 +51,38 @@ namespace Backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Job",
+                columns: table => new
+                {
+                    JobID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Company = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Location = table.Column<string>(type: "text", nullable: false),
+                    Salary = table.Column<string>(type: "text", nullable: false),
+                    Experience = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Job", x => x.JobID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserJobs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    JobID = table.Column<int>(type: "integer", nullable: false),
+                    status = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserJobs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,8 +196,8 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1b7db727-f9fc-4991-be41-e0d66f3cd20a", "2", "User", "User" },
-                    { "44ce3878-9288-419e-8e7a-f2af7e6401d3", "1", "Admin", "Admin" }
+                    { "56c62f39-2d45-469c-9c95-00719ebd9c03", "1", "ADMIN", "ADMIN" },
+                    { "7e37c10b-ccef-445f-aecf-c3cb57a8811b", "2", "USER", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -249,27 +257,16 @@ namespace Backend.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Job");
+
+            migrationBuilder.DropTable(
+                name: "UserJobs");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_UserJobs",
-                table: "UserJobs");
-
-            migrationBuilder.DropColumn(
-                name: "Id",
-                table: "UserJobs");
-
-            migrationBuilder.DropColumn(
-                name: "status",
-                table: "UserJobs");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_UserJobs",
-                table: "UserJobs",
-                columns: new[] { "UserID", "JobID" });
         }
     }
 }

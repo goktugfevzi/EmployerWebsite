@@ -1,7 +1,6 @@
 ﻿using Backend.EfCore;
 using Backend.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
@@ -24,7 +23,7 @@ namespace Backend.Controllers
             ResponseType type = ResponseType.Success;
             try
             {
-                IEnumerable<JobModel> data = _db.GetJobs();
+                IEnumerable<Job> data = _db.GetJobs();
                 if (!data.Any())
                 {
                     type = ResponseType.NotFound;
@@ -47,7 +46,7 @@ namespace Backend.Controllers
             ResponseType type = ResponseType.Success;
             try
             {
-                JobModel data = _db.GetJobById(id);
+                Job data = _db.GetJobById(id);
 
                 if (data == null)
                 {
@@ -63,7 +62,7 @@ namespace Backend.Controllers
         // POST api/<JobsApiController>
         [HttpPost]
         [Route("api/[controller]/saveJob")]
-        public IActionResult Post([FromBody] JobModel model)
+        public IActionResult Post([FromBody] Job model)
         {
             try
             {
@@ -80,12 +79,12 @@ namespace Backend.Controllers
         // PUT api/<JobsApiController>/5
         [HttpPut]
         [Route("api/[controller]/UpdateJob/{id}")]
-        public IActionResult Put([FromRoute] int id, [FromBody] JobModel jobmodel)
+        public IActionResult Put([FromRoute] int id, [FromBody] Job jobmodel)
         {
             try
             {
                 ResponseType type = ResponseType.Success;
-                _db.UpdateJob(id,jobmodel);
+                _db.UpdateJob(id, jobmodel);
                 return Ok(ResponseHandler.GetAppResponse(type, jobmodel));
             }
             catch (Exception ex)
@@ -94,7 +93,7 @@ namespace Backend.Controllers
             }
         }
 
-        // DELETE api/<JobsApiController>/5
+        //DELETE api/<JobsApiController>/5
         [HttpDelete]
         [Route("api/[controller]/DeleteJob/{id}")]
         public IActionResult Delete(int id)

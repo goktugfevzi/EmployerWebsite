@@ -1,5 +1,4 @@
 ﻿using Backend.EfCore;
-using Microsoft.EntityFrameworkCore;
 namespace Backend.Model
 {
     public class DbHelper
@@ -9,29 +8,12 @@ namespace Backend.Model
         {
             _context = context;
         }
-        public List<UserModel> GetUsers()
-        {
-            List<UserModel> response = new List<UserModel>();
-            var dataList = _context.Users.ToList();
-            dataList.ForEach(User => response.Add(new UserModel()
-            {
-                UserID = User.UserID,
-                Name = User.Name,
-                Email = User.Email,
-                Password = User.Password,
-                Title = User.Title,
-                HasJob = User.HasJob,
-                isAdmin = User.isAdmin,
-                JobFinished = User.JobFinished,
 
-            }));
-            return response;
-        }
-        public List<JobModel> GetJobs()
+        public List<Job> GetJobs()
         {
-            List<JobModel> response = new List<JobModel>();
+            List<Job> response = new List<Job>();
             var dataList = _context.Jobs.ToList();
-            dataList.ForEach(Job => response.Add(new JobModel()
+            dataList.ForEach(Job => response.Add(new Job()
             {
                 JobID = Job.JobID,
                 Title = Job.Title,
@@ -43,28 +25,12 @@ namespace Backend.Model
             }));
             return response;
         }
-        public UserModel GetUserById(int id)
+ 
+        public Job GetJobById(int id)
         {
-            UserModel response = new UserModel();
-            var User = _context.Users.Where(d => d.UserID.Equals(id)).FirstOrDefault();
-            return new UserModel
-            {
-                UserID = User.UserID,
-                Name = User.Name,
-                Email = User.Email,
-                Password = User.Password,
-                Title = User.Title,
-                HasJob = User.HasJob,
-                isAdmin = User.isAdmin,
-                JobFinished = User.JobFinished,
-
-            };
-        }
-        public JobModel GetJobById(int id)
-        {
-            JobModel response = new JobModel();
+            Job response = new Job();
             var Job = _context.Jobs.Where(d => d.JobID.Equals(id)).FirstOrDefault();
-            return new JobModel
+            return new Job
             {
                 JobID = Job.JobID,
                 Title = Job.Title,
@@ -76,7 +42,7 @@ namespace Backend.Model
 
             };
         }
-        public void SaveJob(JobModel jobModel)
+        public void SaveJob(Job jobModel)
         {
             Job dbTable = new Job();
 
@@ -87,12 +53,12 @@ namespace Backend.Model
             dbTable.Company = jobModel.Company;
             dbTable.Description = jobModel.Description;
             dbTable.Experience = jobModel.Experience;
-            //dbTable.User = _context.Users.Where(f => f.UserID.Equals(jobModel.UserID)).FirstOrDefault();
+            //dbTable.User = _context.Users.Where(f => f.Id.Equals(jobModel.UserID)).FirstOrDefault();
             _context.Jobs.Add(dbTable);
 
             _context.SaveChanges();
         }
-        public void UpdateJob(int JobID, JobModel jobModel)
+        public void UpdateJob(int JobID, Job jobModel)
         {
             var updatedJob = _context.Jobs.Where(d => d.JobID.Equals(JobID)).FirstOrDefault();
             if (updatedJob != null)
@@ -108,39 +74,7 @@ namespace Backend.Model
 
             }
         }
-        public void SaveUser(UserModel userModel)
-        {
-            User dbTable = new User();
-
-            dbTable.UserID = userModel.UserID;
-            dbTable.Name = userModel.Name;
-            dbTable.Email = userModel.Email;
-            dbTable.Password = userModel.Password;
-            dbTable.Title = userModel.Title;
-            dbTable.HasJob = userModel.HasJob;
-            dbTable.isAdmin = userModel.isAdmin;
-            dbTable.JobFinished = userModel.JobFinished;
-            _context.Users.Add(dbTable);
-            _context.SaveChanges();
-        }
-        public void UpdateUser(UserModel userModel)
-        {
-
-            User dbTable = new User();
-            dbTable = _context.Users.Where(d => d.UserID.Equals(userModel.UserID)).FirstOrDefault();
-            if (dbTable != null)
-            {
-                dbTable.UserID = userModel.UserID;
-                dbTable.Name = userModel.Name;
-                dbTable.Email = userModel.Email;
-                dbTable.Password = userModel.Password;
-                dbTable.Title = userModel.Title;
-                dbTable.HasJob = userModel.HasJob;
-                dbTable.isAdmin = userModel.isAdmin;
-                dbTable.JobFinished = userModel.JobFinished;
-                _context.SaveChanges();
-            }
-        }
+    
         public void DeleteJob(int JobID)
         {
             var job = _context.Jobs.Where(d => d.JobID.Equals(JobID)).FirstOrDefault();
@@ -150,15 +84,15 @@ namespace Backend.Model
                 _context.SaveChanges();
             }
         }
-        public void DeleteUser(int UserID)
-        {
-            var user = _context.Users.Where(d => d.UserID.Equals(UserID)).FirstOrDefault();
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-                _context.SaveChanges();
-            }
-        }
+        //public void DeleteUser(int UserID)
+        //{
+        //    var user = _context.Users.Where(d => d.UserID.Equals(UserID)).FirstOrDefault();
+        //    if (user != null)
+        //    {
+        //        _context.Users.Remove(user);
+        //        _context.SaveChanges();
+        //    }
+        //}
 
     }
 }

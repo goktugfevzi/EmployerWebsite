@@ -59,45 +59,6 @@ namespace Backend.Migrations
                     b.ToTable("Job");
                 });
 
-            modelBuilder.Entity("Backend.EfCore.User", b =>
-                {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserID"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("HasJob")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("JobFinished")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("isAdmin")
-                        .HasColumnType("boolean");
-
-                    b.HasKey("UserID");
-
-                    b.ToTable("User");
-                });
-
             modelBuilder.Entity("Backend.EfCore.UserJobs", b =>
                 {
                     b.Property<int>("Id")
@@ -148,14 +109,14 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cf9547cc-39be-4405-ab37-3ddce665627e",
+                            Id = "776a9fa9-96ad-4617-b8db-a724f54a7c22",
                             ConcurrencyStamp = "1",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0e42a897-7606-4054-a8a7-8b3355a8bd71",
+                            Id = "84d30340-2651-4247-9c66-f3203a39879c",
                             ConcurrencyStamp = "2",
                             Name = "USER",
                             NormalizedName = "USER"

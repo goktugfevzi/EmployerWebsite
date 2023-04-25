@@ -1,6 +1,5 @@
-﻿using Backend.EfCore;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Model
 {
@@ -9,8 +8,6 @@ namespace Backend.Model
         [Key, Required]
         public int UserJobID { get; set; }
 
-        [ForeignKey("User")]
-        public int UserID { get; set; }
 
         [ForeignKey("Job")]
         public int JobID { get; set; }

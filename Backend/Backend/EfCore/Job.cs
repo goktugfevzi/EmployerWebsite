@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Backend.EfCore
 {
@@ -16,6 +16,5 @@ namespace Backend.EfCore
         public string Location { get; set; } = string.Empty;
         public string Salary { get; set; } = string.Empty;
         public string Experience { get; set; } = string.Empty;
-
     }
 }
