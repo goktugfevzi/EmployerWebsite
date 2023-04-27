@@ -1,0 +1,5 @@
+@import '../../mixins';
+
+.add-job{
+    @include main-style();
+}
