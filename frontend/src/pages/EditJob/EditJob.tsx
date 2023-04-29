@@ -19,6 +19,10 @@ const EditJob: React.FC = () => {
         });
     };
 
+    const handleBackBtnClick = () => {
+        redirect("/Jobs");
+    };
+
     React.useEffect(() => {
         axios.get<IJob>(`${getJobByIdUrl}/${id}`).then((response) =>
             setJob({
@@ -31,6 +35,7 @@ const EditJob: React.FC = () => {
             })
         );
     }, []);
+
 
     const handleSaveBtnClick = () => {
         if (job.title === "" || job.company === "" || job.description === "" || job.location === "" || job.salary === "" || job.experience === "") {
@@ -49,11 +54,6 @@ const EditJob: React.FC = () => {
             .then((resposne) => redirect("/Jobs", { state: { message: "Job Updated Successfully" } }))
             .catch((error) => alert("Error"));
     };
-
-    const handleBackBtnClick = () => {
-        redirect("/Jobs");
-    };
-
     return (
         <div className="edit-job">
             <h2>Edit Job</h2>
@@ -108,6 +108,7 @@ const EditJob: React.FC = () => {
                 <Button variant="outlined" color="primary" onClick={handleSaveBtnClick}>
                     Save
                 </Button>
+               
                 <Button variant="outlined" color="secondary" onClick={handleBackBtnClick}>
                     Back
                 </Button>

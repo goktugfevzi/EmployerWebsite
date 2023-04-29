@@ -62,7 +62,7 @@ namespace Backend.Controllers
         // POST api/<JobsApiController>
         [HttpPost]
         [Route("api/[controller]/saveJob")]
-        public IActionResult Post([FromBody] Job model)
+        public IActionResult Post([FromBody] JobDTO model)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Backend.Controllers
         // PUT api/<JobsApiController>/5
         [HttpPut]
         [Route("api/[controller]/UpdateJob/{id}")]
-        public IActionResult Put([FromRoute] int id, [FromBody] Job jobmodel)
+        public IActionResult Put([FromRoute] int id, [FromBody] JobDTO jobmodel)
         {
             try
             {

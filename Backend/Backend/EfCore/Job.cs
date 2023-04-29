@@ -11,11 +11,9 @@ namespace Backend.EfCore
         [Key]
         public int JobId { get; set; }
         public string Title { get; set; } = string.Empty;
-        public string Company { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public string Location { get; set; } = string.Empty;
-        public string Salary { get; set; } = string.Empty;
-        public string Experience { get; set; } = string.Empty;
+        public DateTime Created { get; set; }
+        public DateTime Deadline { get; set; }
         public Department department { get; set; }
 
     }

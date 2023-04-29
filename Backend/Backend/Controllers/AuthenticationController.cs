@@ -4,6 +4,7 @@ using Backend.Model.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
@@ -102,7 +103,7 @@ namespace Backend.Controllers
                        new ApiResponse { Code = "Error", Message = "This User Doesnot exist!" });
         }
 
-       // await _signInManager.SignOutAsync();
+        // await _signInManager.SignOutAsync();
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginUser loginModel)
@@ -133,8 +134,14 @@ namespace Backend.Controllers
             }
             return Unauthorized();
         }
-        //await _signInManager.SignOutAsync();
 
+        [HttpPost]
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok();
+        }
 
         [HttpPut]
         [AllowAnonymous]
@@ -183,13 +190,56 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Logout")]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
             return Ok();
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Route("role/{userId}")]
+        public async Task<IActionResult> GetUserRole(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+            return Ok(roles);
+        }
+
+        [HttpGet]
+        [Route("getuserByname/{name}")]
+        public IActionResult Get(string name)
+        {
+            var user = _db.Users.Where(d => d.UserName.Equals(name)).FirstOrDefault();
+            ResponseType type = ResponseType.Success;
+            try
+            {
+                User data = new User()
+                {
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    department = _db.Departments.FirstOrDefault(d => d.Equals(user.department)),
+                    Id=user.Id,
+                    EmailConfirmed= user.EmailConfirmed,
+                    PasswordHash= user.PasswordHash
+                };
+                if (data == null)
+                {
+                    type = ResponseType.NotFound;
+                }
+                return Ok(ResponseHandler.GetAppResponse(type, data));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ResponseHandler.GetExceptionResponse(ex));
+            }
+        }
+
+    [HttpPost]
         [AllowAnonymous]
         [Route("change-password")]
         public async Task<IActionResult> ChangePassword(ChangePassword changePassword)

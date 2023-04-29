@@ -64,23 +64,13 @@ namespace Backend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("JobId"));
 
-                    b.Property<string>("Company")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Experience")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Salary")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -222,14 +212,14 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b0c8b3b8-a663-4304-a4a7-65e1d50bcb8a",
+                            Id = "65e6b260-b21f-4757-9606-0d70bfc4076c",
                             ConcurrencyStamp = "1",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "97fc3338-3ed2-4b1f-a2b6-59dc939e02a9",
+                            Id = "766dc441-3ab3-46ad-81c3-6b24bea11721",
                             ConcurrencyStamp = "2",
                             Name = "USER",
                             NormalizedName = "USER"

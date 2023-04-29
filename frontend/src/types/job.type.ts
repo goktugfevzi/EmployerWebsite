@@ -1,14 +1,13 @@
 export interface IJob {
-  jobID: string;
-  userId: string;
+  jobId: number | any;
   company: string;
   description: string;
   title: string;
   location: string;
   salary: string;
   experience: string;
-  employeeName: string;
-  employeeEmail: string;
+  departmentId: number;
+  departmentIdConverted: string;
 }
 
 

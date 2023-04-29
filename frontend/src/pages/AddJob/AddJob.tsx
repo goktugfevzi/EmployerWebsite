@@ -1,26 +1,31 @@
 import React from "react";
 import "./AddJob.scss";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import { IJob } from "../../types/job.type";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { addJobUrl } from "../../constants/url.constants";
 
 const AddProduct: React.FC = () => {
-    const [job, setProduct] = React.useState<Partial<IJob>>({ title: "", company: "", description: "", location: "", salary: "", experience: "" });
+    const [job, setJob] = React.useState<Partial<IJob>>({ departmentIdConverted: undefined, title: "", company: "", description: "", location: "", salary: "", experience: "" });
     const redirect = useNavigate();
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setProduct({
+        setJob({
             ...job,
             [event.target.name]: event.target.value,
         });
     };
 
     const handleSaveBtnClick = () => {
-        if (job.title === "" || job.company === "" || job.description === "" || job.location === "" || job.salary === "" || job.experience === "") {
+        console.log(job.departmentIdConverted);
+        if (job.departmentIdConverted === null || job.title === "" || job.company === "" || job.description === "" || job.location === "" || job.salary === "" || job.experience === "") {
             alert("Enter Values");
             return;
+        }
+
+        if (job.departmentIdConverted !== undefined) {
+            job.departmentId = parseInt(job.departmentIdConverted);
         }
         const data: Partial<IJob> = {
             company: job.company,
@@ -29,6 +34,7 @@ const AddProduct: React.FC = () => {
             salary: job.salary,
             location: job.location,
             experience: job.experience,
+            departmentId: job.departmentId
         };
         axios
             .post(addJobUrl, data)
@@ -36,6 +42,18 @@ const AddProduct: React.FC = () => {
             .catch((error) => alert("Error"));
     };
 
+    const changeHandlers = (event: SelectChangeEvent<string>) => {
+        if (job.departmentIdConverted !== undefined) {
+            var departmentId = parseInt(job.departmentIdConverted);
+        }
+        setJob({
+            ...job,
+            departmentIdConverted: event.target.value,
+        });
+    };
+    // "department":{
+    //     "Id":1,
+    //     "Name":"YAZILIM"
     const handleBackBtnClick = () => {
         redirect("/jobs");
     };
@@ -91,6 +109,20 @@ const AddProduct: React.FC = () => {
                 value={job.title}
                 onChange={changeHandler}
             />
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Department</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={job.departmentIdConverted}
+                    label="Department"
+                    onChange={changeHandlers}
+                >
+                    <MenuItem value={1}>YAZILIM</MenuItem>
+                    <MenuItem value={2}>MUHASEBE</MenuItem>
+                    <MenuItem value={3}>HR</MenuItem>
+                </Select>
+            </FormControl>
             <div>
                 <Button variant="outlined" color="primary" onClick={handleSaveBtnClick}>
                     Save

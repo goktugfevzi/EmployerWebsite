@@ -1,5 +1,47 @@
-@import '../../mixins';
+@import "../../mixins";
 
-.add-job{
-    @include main-style();
+.add-job {
+  @include main-style();
+  background-color: #F1F6F9;
+  color: blue($color: #000000);
+  padding: 20px;
+  border-radius: 10px;
+
+  .add-job h2 {
+    margin-bottom: 20px;
+  }
+
+  .add-job .MuiFormControl-root {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .add-job .MuiInputLabel-root,
+  .add-job .MuiInputBase-root {
+    color: #fff;
+  }
+
+  .add-job .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: #fff;
+  }
+
+  .add-job .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #fff;
+  }
+
+  .add-job .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #fff;
+  }
+
+  .add-job .MuiButton-root {
+    margin-top: 20px;
+    margin-right: 10px;
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .add-job .MuiButton-root:hover {
+    background-color: #fff;
+    color: #1d1d1d;
+  }
 }

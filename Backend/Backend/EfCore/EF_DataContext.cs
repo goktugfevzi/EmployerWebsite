@@ -14,6 +14,8 @@ namespace Backend.EfCore
         public DbSet<Department> Departments { get; set; }
         public DbSet<UserJob> UsersJobs { get; set; }
 
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
            base.OnModelCreating(builder);

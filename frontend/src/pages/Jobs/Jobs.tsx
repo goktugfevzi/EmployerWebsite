@@ -4,7 +4,7 @@ import "./Jobs.scss";
 import { IJob } from "../../types/job.type";
 import { Button } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
-import { baseUrl } from "../../constants/url.constants";
+import { baseUrl, deleteJobUrl } from "../../constants/url.constants";
 import Swal from "sweetalert2";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -29,79 +29,81 @@ const Jobs: React.FC = () => {
         }
     };
 
+
     useEffect(() => {
         fetchJobsList();
     }, [])
 
-
-
-
-
-
-    const redirectToEditPage = (id: string) => {
-        redirect(`/jobs/edit/${id}`);
+    const handleDeleteBtnClick = (id: number) => {
+        console.log(id);
+        axios
+            .delete(`${deleteJobUrl}/${id}`)
+            .then((response) => redirect("/Jobs", { state: { message: "Jobs Deleted Successfully" } }))
+            .then(() => window.location.reload())
+            .catch ((error) => alert("Error"));
     };
 
-    const redirectToDeletePage = (id: string) => {
-        redirect(`/jobs/delete/${id}`);
-    };
-    return (
+const redirectToEditPage = (id: number) => {
+    console.log(id);
 
-        <div className="Jobs">
-            <h1>Jobs List</h1>
-            {jobs.length < 0 ? (
-                <h1>No Jobs</h1>
-            ) : (
-                <div className="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Company</th>
-                                <th>Location</th>
-                                <th>Experience</th>
-                                <th>Salary</th>
-                                <th>description</th>
+    redirect(`/jobs/edit/${id}`);
+};
+
+return (
+
+    <div className="Jobs">
+        <h1>Jobs List</h1>
+        {jobs.length < 0 ? (
+            <h1>No Jobs</h1>
+        ) : (
+            <div className="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Company</th>
+                            <th>Location</th>
+                            <th>Experience</th>
+                            <th>Salary</th>
+                            <th>description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {jobs.map((job) => (
+                            <tr key={job.jobId}>
+                                <td>{job.title}</td>
+                                <td>{job.company}</td>
+                                <td>{job.location}</td>
+                                <td>{job.experience}</td>
+                                <td>{job.salary}</td>
+                                <td>{job.description}</td>
+                                <td>
+                                    <Button
+                                        variant="outlined"
+                                        color="warning"
+                                        sx={{ mx: 3 }}
+                                        onClick={() => redirectToEditPage(job.jobId)}
+                                    >
+                                        <Edit />
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        color="error"
+                                        sx={{ mx: 3 }}
+                                        onClick={() => handleDeleteBtnClick(job.jobId)}
+                                    >
+                                        <Delete />
+                                    </Button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
+                        ))}
 
-                            {
-                                jobs.map((job, index) => (
-                                    <tr key={index}>
-                                        <td>{job.title}</td>
-                                        <td>{job.company}</td>
-                                        <td>{job.location}</td>
-                                        <td>{job.experience}</td>
-                                        <td>{job.salary}</td>
-                                        <td>{job.description}</td>
-                                        <td>
-                                            <Button
-                                                variant="outlined"
-                                                color="warning"
-                                                sx={{ mx: 3 }}
-                                                onClick={() => redirectToEditPage(job.jobID)}
-                                            >
-                                                <Edit />
-                                            </Button>
-                                            <Button
-                                                variant="outlined"
-                                                color="error"
-                                                sx={{ mx: 3 }}
-                                                onClick={() => redirectToDeletePage(job.jobID)}
-                                            >
-                                                <Delete />
-                                            </Button>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
-            )}
-        </div>
-    );
+                    </tbody>
+                </table>
+            </div>
+        )}
+    </div>
+);
 };
 export default Jobs;

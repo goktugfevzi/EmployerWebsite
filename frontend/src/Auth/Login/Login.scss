@@ -1,13 +1,14 @@
 @import "../../mixins";
 
-.singup {
+.loginpage {
   @include main-style();
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center fixed;
+  background: url("https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+    no-repeat center center fixed;
   background-size: cover;
 
   .form {
@@ -55,5 +56,11 @@
         background-color: #303f9f;
       }
     }
+    .typography-style {
+        font-size: 1.2rem;
+        color: #3f51b5;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
   }
 }

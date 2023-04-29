@@ -22,65 +22,69 @@ namespace Backend.Model
             {
                 JobId = Job.JobId,
                 Title = Job.Title,
-                Company = Job.Company,
                 Description = Job.Description,
-                Location = Job.Location,
-                Salary = Job.Salary,
-                Experience = Job.Experience,
+                Created = Job.Created,
+                Deadline = Job.Deadline,
+                department = Job.department,
             }));
             return response;
         }
- 
+
+
         public Job GetJobById(int id)
         {
-            Job response = new Job();
             var Job = _context.Jobs.Where(d => d.JobId.Equals(id)).FirstOrDefault();
             return new Job
             {
                 JobId = Job.JobId,
                 Title = Job.Title,
-                Company = Job.Company,
                 Description = Job.Description,
-                Location = Job.Location,
-                Salary = Job.Salary,
-                Experience = Job.Experience,
+                Created = Job.Created,
+                Deadline = Job.Deadline,
+                department = Job.department,
 
             };
+
         }
-        public void SaveJob(Job jobModel)
+        public void SaveJob(JobDTO jobModel)
         {
             Job dbTable = new Job();
 
             dbTable.Title = jobModel.Title;
-            dbTable.Location = jobModel.Location;
-            dbTable.Salary = jobModel.Salary;
-            dbTable.Company = jobModel.Company;
+            DateTime utcDateTime = DateTime.Now.ToUniversalTime();
+            dbTable.Created = utcDateTime;
+            utcDateTime = jobModel.Deadline.ToUniversalTime();
+            dbTable.Deadline = utcDateTime;
             dbTable.Description = jobModel.Description;
-            dbTable.Experience = jobModel.Experience;
-            dbTable.department = _context.Departments.FirstOrDefault(d => d.Equals(jobModel.department));
-            //dbTable.User = _context.Users.Where(f => f.Id.Equals(jobModel.UserID)).FirstOrDefault();
+            dbTable.department = _context.Departments.Where(d => d.Id.Equals(jobModel.DepartmentId)).FirstOrDefault();
             _context.Jobs.Add(dbTable);
-
             _context.SaveChanges();
         }
 
-        public void UpdateJob(int JobID, Job jobModel)
+
+        public void UpdateJob(int JobID, JobDTO jobModel)
         {
             var updatedJob = _context.Jobs.Where(d => d.JobId.Equals(JobID)).FirstOrDefault();
             if (updatedJob != null)
             {
-
                 updatedJob.Title = jobModel.Title;
-                updatedJob.Location = jobModel.Location;
-                updatedJob.Salary = jobModel.Salary;
-                updatedJob.Company = jobModel.Company;
                 updatedJob.Description = jobModel.Description;
-                updatedJob.Experience = jobModel.Experience;
+               DateTime utcDateTime = jobModel.Deadline.ToUniversalTime();
+
+                updatedJob.Deadline = utcDateTime;
+                if (updatedJob.department != null)
+                {
+                    updatedJob.department.Id = jobModel.DepartmentId;
+                }
+                else
+                {
+                    updatedJob.department = new Department { Id = jobModel.DepartmentId };
+                }
                 _context.SaveChanges();
 
             }
         }
-    
+
         public void DeleteJob(int JobID)
         {
             var job = _context.Jobs.Where(d => d.JobId.Equals(JobID)).FirstOrDefault();
@@ -95,15 +99,5 @@ namespace Backend.Model
         {
             return _context.Departments.First(d => d.Id.Equals(deptId));
         }
-        //public void DeleteUser(int UserID)
-        //{
-        //    var user = _context.Users.Where(d => d.UserID.Equals(UserID)).FirstOrDefault();
-        //    if (user != null)
-        //    {
-        //        _context.Users.Remove(user);
-        //        _context.SaveChanges();
-        //    }
-        //}
-
     }
 }
