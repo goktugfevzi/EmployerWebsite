@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(EF_DataContext))]
-    [Migration("20230427061551_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230502140950_newMigration")]
+    partial class newMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,25 +67,18 @@ namespace Backend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("JobId"));
 
-                    b.Property<string>("Company")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Experience")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Salary")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -225,14 +218,14 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4bf99ebd-230a-4a7f-b4cc-f63c593bff5d",
+                            Id = "bc48cfe7-0d75-4675-aa4e-2b04e7878fe4",
                             ConcurrencyStamp = "1",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "58faac0b-f9cc-471c-baa5-b889632224c4",
+                            Id = "8c99abd6-4b96-4024-99e1-b3f7ee55a15d",
                             ConcurrencyStamp = "2",
                             Name = "USER",
                             NormalizedName = "USER"

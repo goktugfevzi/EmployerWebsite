@@ -37,6 +37,26 @@ namespace Backend.Controllers
         }
 
 
+        [HttpGet]
+        [Route("api/[controller]/GetUserjob/{userId}")]
+        public IActionResult Get(string userId)
+        {
+            ResponseType type = ResponseType.Success;
+            try
+            {
+                IEnumerable<UserJobResponse> data = _db.GetUserJobs(userId);
+                if (!data.Any())
+                {
+                    type = ResponseType.NotFound;
+                }
+                return Ok(ResponseHandler.GetAppResponse(type, data));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ResponseHandler.GetExceptionResponse(ex));
+            }
+        }
+
         // GET api/<JobsApiController>/5
 
         [HttpGet]
@@ -86,6 +106,21 @@ namespace Backend.Controllers
                 ResponseType type = ResponseType.Success;
                 _db.UpdateJob(id, jobmodel);
                 return Ok(ResponseHandler.GetAppResponse(type, jobmodel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ResponseHandler.GetExceptionResponse(ex));
+            }
+        }
+        [HttpPut]
+        [Route("api/[controller]/UpdateJobStatus/{id}")]
+        public IActionResult Put([FromRoute] int id, [FromBody] string Status)
+        {
+            try
+            {
+                ResponseType type = ResponseType.Success;
+                _db.UpdateJobStatus(id, Status);
+                return Ok(ResponseHandler.GetAppResponse(type, Status));
             }
             catch (Exception ex)
             {

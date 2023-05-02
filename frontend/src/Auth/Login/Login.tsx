@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IUserLogin } from '../../types/user.login.type';
 import axios from "axios";
 import '../../Auth/Login/Login.scss'
@@ -22,37 +22,42 @@ const Login: React.FC = () => {
             [event.target.name]: event.target.value,
         });
     };
-    const handleInputChange = () => {
+    const handleInputChange = async () => {
         if (user.password === "" || user.username === "") {
             console.log("karakter gir");
         }
-        AuthService.login(user.username, user.password)
-            .then((resposne) => {
-                console.log("ilk the içerisindeyim");
-                const user = AuthService.getCurrentUser();
-           
-                AuthService.getCurrentUserRole(user.id as string)
-                    .then((userRole) => {
-                       console.log("if dışındayim");
-                       console.log(userRole);
-                       console.log(userRole);
-                       console.log(userRole);
-                       console.log(userRole);
-                       console.log(userRole);
-                        if (userRole[0] === "ADMIN") {
-                            redirect("/admin", { state: { message: "Admin Login Successfully" } })
-                        } else if (userRole[0] === "USER") {
-                            redirect("/user", { state: { message: "User Login Successfully" } })
+        console.log("login çalışıyor");
 
-                        }
-                    })
-                    .catch((error) => alert("Role ERROR"));
-            })
-            .catch((error) => alert("Error"));
+        try {
+            const response = await AuthService.login(user.username, user.password);
+            console.log("ilk the içerisindeyim");
+
+            const users = await AuthService.getCurrentUser();
+            const userRole = await AuthService.getCurrentUserRole(users.id as string);
+
+            console.log("if dışındayim");
+            if (userRole[0] === "ADMIN") {
+                console.log("if içindeyim");
+                redirect("/admin", { state: { message: "Admin Login Successfully" } });
+                document.location.reload();
+            } else if (userRole[0] === "USER") {
+                console.log("if içindeyim");
+                redirect("/user", { state: { message: "User Login Successfully" } });
+                document.location.reload();
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
+
     const handleBackBtnClick = () => {
-        redirect("Signup");
+        redirect("signup");
     }
+    useEffect(() => {
+        setTimeout(() => {
+            document.location.reload();
+        }, 300000000);
+    }, []);
 
     return (
         <div className="loginpage">

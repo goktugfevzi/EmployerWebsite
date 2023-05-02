@@ -4,7 +4,9 @@ import {
   LogInUrl,
   SingOutUrl,
   getDataByName,
+  updateJobUrl,
   getUserRoleUrl,
+  getUserJobUrl,
 } from "../constants/url.constants";
 import jwtDecode from "jwt-decode";
 
@@ -16,23 +18,34 @@ const register = (username, email, password) => {
   });
 };
 
-const login = (username, password) => {
-  return axios
-    .post(LogInUrl, {
+const login = async (username, password) => {
+  try {
+    const response = await axios.post(LogInUrl, {
       username,
       password,
-    })
-    .then((response) => {
-      if (response.data) {
-        const decodedToken = jwtDecode(response.data.token);
-        const username =
-          decodedToken[
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-          ];
-        getData(username);
-      }
-      return response.data;
     });
+    if (response.data) {
+      const decodedToken = jwtDecode(response.data.token);
+      const username =
+        decodedToken[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+        ];
+      await getData(username);
+    }
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const updateJobStatus = async (id, data) => {
+  console.log(data);
+  axios
+    .put(`${updateJobUrl}/${id}`, data)
+   
+    .catch((error) => alert("Error"));
+  return;
 };
 const getData = async (user) => {
   if (!user) {
@@ -48,11 +61,21 @@ const getData = async (user) => {
   }
 };
 
+const getUserJob = async (id) => {
+  try {
+    const response = await axios.get(getUserJobUrl + id);
+    return response.data.responseData;
+  } catch (error) {
+    return error;
+  }
+};
+
 const logout = () => {
   localStorage.removeItem("user");
-  return axios.post(SingOutUrl).then((response) => {
-    return response.data;
-  });
+  console.log(localStorage.getItem("user"));
+  // return axios.post(SingOutUrl).then((response) => {
+  //   return response.data;
+  // });
 };
 
 const getCurrentUser = () => {
@@ -60,7 +83,6 @@ const getCurrentUser = () => {
 };
 
 const getCurrentUserRole = async (id) => {
-  
   const response = await axios.get(getUserRoleUrl + id.toString());
   return response.data;
 };
@@ -70,6 +92,8 @@ const AuthService = {
   logout,
   getCurrentUser,
   getCurrentUserRole,
+  getUserJob,
+  updateJobStatus,
 };
 
 export default AuthService;

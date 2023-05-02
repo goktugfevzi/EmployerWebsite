@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { addJobUrl } from "../../constants/url.constants";
 
 const AddProduct: React.FC = () => {
-    const [job, setJob] = React.useState<Partial<IJob>>({ departmentIdConverted: undefined, title: "", company: "", description: "", location: "", salary: "", experience: "" });
+    const [job, setJob] = React.useState<Partial<IJob>>({ departmentIdConverted: undefined, title: "",description: "" });
     const redirect = useNavigate();
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +19,7 @@ const AddProduct: React.FC = () => {
 
     const handleSaveBtnClick = () => {
         console.log(job.departmentIdConverted);
-        if (job.departmentIdConverted === null || job.title === "" || job.company === "" || job.description === "" || job.location === "" || job.salary === "" || job.experience === "") {
+        if (job.departmentIdConverted === null || job.title === "" || job.description === "") {
             alert("Enter Values");
             return;
         }
@@ -28,12 +28,8 @@ const AddProduct: React.FC = () => {
             job.departmentId = parseInt(job.departmentIdConverted);
         }
         const data: Partial<IJob> = {
-            company: job.company,
             title: job.title,
             description: job.description,
-            salary: job.salary,
-            location: job.location,
-            experience: job.experience,
             departmentId: job.departmentId
         };
         axios
@@ -61,30 +57,9 @@ const AddProduct: React.FC = () => {
     return (
         <div className="add-job">
             <h2>Add New job</h2>
-            <TextField
-                autoComplete="off"
-                label="salary"
-                variant="outlined"
-                name="salary"
-                value={job.salary}
-                onChange={changeHandler}
-            />
-            <TextField
-                autoComplete="off"
-                label="company"
-                variant="outlined"
-                name="company"
-                value={job.company}
-                onChange={changeHandler}
-            />
-            <TextField
-                autoComplete="off"
-                label="experience"
-                variant="outlined"
-                name="experience"
-                value={job.experience}
-                onChange={changeHandler}
-            />
+  
+
+ 
             <TextField
                 autoComplete="off"
                 label="description"
@@ -93,14 +68,7 @@ const AddProduct: React.FC = () => {
                 value={job.description}
                 onChange={changeHandler}
             />
-            <TextField
-                autoComplete="off"
-                label="location"
-                variant="outlined"
-                name="location"
-                value={job.location}
-                onChange={changeHandler}
-            />
+ 
             <TextField
                 autoComplete="off"
                 label="Title"

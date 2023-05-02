@@ -1,0 +1,100 @@
+@import "../../mixins";
+
+.Profile {
+  @include main-style();
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .label {
+      font-size: 20px;
+      font-weight: bold;
+      margin-right: 10px;
+      width: 150px;
+    }
+
+    .value {
+      font-size: 20px;
+      flex-grow: 1;
+    }
+  }
+
+  .job {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f2f2f2;
+
+    .job-title {
+      font-size: 18px;
+      font-weight: bold;
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+
+    .job-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .btn-complete {
+      background-color: green;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+
+      &:hover {
+        background-color: darkgreen;
+      }
+    }
+  }
+
+  .btn-change-password {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+
+    &:hover {
+      background-color: darkblue;
+    }
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+
+    &:hover {
+      background-color: #3E8E41;
+    }
+  }
+}

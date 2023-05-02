@@ -74,6 +74,9 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -212,14 +215,14 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "65e6b260-b21f-4757-9606-0d70bfc4076c",
+                            Id = "bc48cfe7-0d75-4675-aa4e-2b04e7878fe4",
                             ConcurrencyStamp = "1",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "766dc441-3ab3-46ad-81c3-6b24bea11721",
+                            Id = "8c99abd6-4b96-4024-99e1-b3f7ee55a15d",
                             ConcurrencyStamp = "2",
                             Name = "USER",
                             NormalizedName = "USER"

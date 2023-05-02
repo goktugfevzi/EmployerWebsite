@@ -22,6 +22,7 @@ namespace Backend.Model
             {
                 JobId = Job.JobId,
                 Title = Job.Title,
+                Status = Job.Status,
                 Description = Job.Description,
                 Created = Job.Created,
                 Deadline = Job.Deadline,
@@ -30,6 +31,31 @@ namespace Backend.Model
             return response;
         }
 
+        public List<UserJobResponse> GetUserJobs(string userId)
+        {
+            List<UserJobResponse> response = new List<UserJobResponse>();
+            var userJobs = _context.UsersJobs.Where(uj => uj.UserId == userId).ToList();
+            foreach (var userJob in userJobs)
+            {
+                var job = _context.Jobs.FirstOrDefault(j => j.JobId == userJob.JobId);
+                if (job != null)
+                {
+                    response.Add(new UserJobResponse()
+                    {
+                        UserJobId = userJob.Id,
+                        UserId = userJob.UserId,
+                        JobId = job.JobId,
+                        Title = job.Title,
+                        Status = job.Status,
+                        Description = job.Description,
+                        Created = job.Created,
+                        Deadline = job.Deadline,
+                        department = job.department,
+                    });
+                }
+            }
+            return response;
+        }
 
         public Job GetJobById(int id)
         {
@@ -38,6 +64,7 @@ namespace Backend.Model
             {
                 JobId = Job.JobId,
                 Title = Job.Title,
+                Status = Job.Status,
                 Description = Job.Description,
                 Created = Job.Created,
                 Deadline = Job.Deadline,
@@ -55,6 +82,7 @@ namespace Backend.Model
             dbTable.Created = utcDateTime;
             utcDateTime = jobModel.Deadline.ToUniversalTime();
             dbTable.Deadline = utcDateTime;
+            dbTable.Status = jobModel.Status;
             dbTable.Description = jobModel.Description;
             dbTable.department = _context.Departments.Where(d => d.Id.Equals(jobModel.DepartmentId)).FirstOrDefault();
             _context.Jobs.Add(dbTable);
@@ -68,8 +96,9 @@ namespace Backend.Model
             if (updatedJob != null)
             {
                 updatedJob.Title = jobModel.Title;
+                updatedJob.Status = jobModel.Status;
                 updatedJob.Description = jobModel.Description;
-               DateTime utcDateTime = jobModel.Deadline.ToUniversalTime();
+                DateTime utcDateTime = jobModel.Deadline.ToUniversalTime();
 
                 updatedJob.Deadline = utcDateTime;
                 if (updatedJob.department != null)
@@ -82,6 +111,21 @@ namespace Backend.Model
                 }
                 _context.SaveChanges();
 
+            }
+        }
+        public void UpdateJobStatus(int JobID, string status)
+        {
+            bool statusConverted=false;
+            if (status == "true")
+            {
+                statusConverted = true;
+
+            }
+            var updatedJob = _context.Jobs.Where(d => d.JobId.Equals(JobID)).FirstOrDefault();
+            if (updatedJob != null)
+            {
+                updatedJob.Status = statusConverted;
+                _context.SaveChanges();
             }
         }
 

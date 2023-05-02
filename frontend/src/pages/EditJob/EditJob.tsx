@@ -7,7 +7,7 @@ import axios from "axios";
 import { updateJobUrl, getJobByIdUrl } from "../../constants/url.constants";
 
 const EditJob: React.FC = () => {
-    const [job, setJob] = React.useState<Partial<IJob>>({ title: "", company: "", description: "", location: "", salary: "", experience: "" });
+    const [job, setJob] = React.useState<Partial<IJob>>({ title: "", description: ""});
 
     const redirect = useNavigate();
     const { id } = useParams();
@@ -27,27 +27,21 @@ const EditJob: React.FC = () => {
         axios.get<IJob>(`${getJobByIdUrl}/${id}`).then((response) =>
             setJob({
                 title: response.data.title,
-                company: response.data.company,
                 description: response.data.description,
-                salary: response.data.salary,
-                location: response.data.location,
-                experience: response.data.experience,
             })
         );
     }, []);
 
 
     const handleSaveBtnClick = () => {
-        if (job.title === "" || job.company === "" || job.description === "" || job.location === "" || job.salary === "" || job.experience === "") {
+        if (job.title === "" ||  job.description === "" ) {
             console.log("karakter gir");
         }
         const data: Partial<IJob> = {
-            company: job.company,
+
             title: job.title,
             description: job.description,
-            salary: job.salary,
-            location: job.location,
-            experience: job.experience,
+  
         };
         axios
             .put(`${updateJobUrl}/${id}`, data)
@@ -57,22 +51,8 @@ const EditJob: React.FC = () => {
     return (
         <div className="edit-job">
             <h2>Edit Job</h2>
-            <TextField
-                autoComplete="off"
-                label="company"
-                variant="outlined"
-                name="company"
-                value={job.company}
-                onChange={changeHandler}
-            />
-            <TextField
-                autoComplete="off"
-                label="experience"
-                variant="outlined"
-                name="experience"
-                value={job.experience}
-                onChange={changeHandler}
-            /> <TextField
+        
+         <TextField
                 autoComplete="off"
                 label="description"
                 variant="outlined"
@@ -80,22 +60,8 @@ const EditJob: React.FC = () => {
                 value={job.description}
                 onChange={changeHandler}
             />
-            <TextField
-                autoComplete="off"
-                label="salary"
-                variant="outlined"
-                name="salary"
-                value={job.salary}
-                onChange={changeHandler}
-            />
-            <TextField
-                autoComplete="off"
-                label="location"
-                variant="outlined"
-                name="location"
-                value={job.location}
-                onChange={changeHandler}
-            />
+      
+      
             <TextField
                 autoComplete="off"
                 label="Title"

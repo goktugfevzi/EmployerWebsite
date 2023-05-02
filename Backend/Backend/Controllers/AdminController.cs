@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace Backend.Controllers
 {
-    [Authorize(Roles ="ADMIN")]
+    //[Authorize(Roles ="ADMIN")]
     [Route("api/[controller]")]
     [ApiController]   
     public class AdminController : Controller
@@ -50,7 +50,6 @@ namespace Backend.Controllers
         [Route("saveuserjob")]
         public async Task<IActionResult> SaveUserJob([FromBody] UserJobDto job)
         {
-
             try
             {
                 ResponseType type = ResponseType.Success;

@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class newMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -101,11 +101,10 @@ namespace Backend.Migrations
                     JobId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
-                    Company = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    Location = table.Column<string>(type: "text", nullable: false),
-                    Salary = table.Column<string>(type: "text", nullable: false),
-                    Experience = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<bool>(type: "boolean", nullable: false),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Deadline = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     departmentId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -236,8 +235,8 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4bf99ebd-230a-4a7f-b4cc-f63c593bff5d", "1", "ADMIN", "ADMIN" },
-                    { "58faac0b-f9cc-471c-baa5-b889632224c4", "2", "USER", "USER" }
+                    { "8c99abd6-4b96-4024-99e1-b3f7ee55a15d", "2", "USER", "USER" },
+                    { "bc48cfe7-0d75-4675-aa4e-2b04e7878fe4", "1", "ADMIN", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(

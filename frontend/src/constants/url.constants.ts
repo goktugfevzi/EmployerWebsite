@@ -8,3 +8,4 @@ export const LogInUrl="http://localhost:5133/api/Authentication/login";
 export const SingOutUrl="http://localhost:5133/api/Authentication/logout";
 export const getDataByName="http://localhost:5133/api/Authentication/getuserByname/";
 export const getUserRoleUrl="http://localhost:5133/api/Authentication/role/";
+export const getUserJobUrl="http://localhost:5133/api/JobsApi/GetUserjob/";

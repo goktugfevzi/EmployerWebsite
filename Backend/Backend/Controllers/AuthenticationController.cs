@@ -222,8 +222,8 @@ namespace Backend.Controllers
                 {
                     Email = user.Email,
                     UserName = user.UserName,
-                    department = _db.Departments.FirstOrDefault(d => d.Equals(user.department)),
-                    Id=user.Id,
+                    departmentId = user.departmentId,
+                    Id =user.Id,
                     EmailConfirmed= user.EmailConfirmed,
                     PasswordHash= user.PasswordHash
                 };

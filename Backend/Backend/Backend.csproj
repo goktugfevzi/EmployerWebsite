@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\UserManagementService\UserManagementService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UserManagementService\UserManagementService.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -7,14 +7,8 @@ import AuthService from "../../services/auth.service";
 
 const Home = () => {
    const redirect = useNavigate();
-
   const user = AuthService.getCurrentUser();
   
-console.log(user);
-console.log(user);
-console.log(user);
-console.log(user);
-console.log(user.userName);
    return (
       <div className="home">
          <h1>Welcome
