@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { addJobUrl } from "../../constants/url.constants";
 
 const AddProduct: React.FC = () => {
-    const [job, setJob] = React.useState<Partial<IJob>>({ departmentIdConverted: undefined, title: "",description: "" });
+    const [job, setJob] = React.useState<Partial<IJob>>({ departmentIdConverted: "", title: "", description: "" });
     const redirect = useNavigate();
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +19,7 @@ const AddProduct: React.FC = () => {
 
     const handleSaveBtnClick = () => {
         console.log(job.departmentIdConverted);
-        if (job.departmentIdConverted === null || job.title === "" || job.description === "") {
+        if (job.departmentIdConverted === null || job.title === "" || job.description === "" || job.deadline === "") {
             alert("Enter Values");
             return;
         }
@@ -30,7 +30,8 @@ const AddProduct: React.FC = () => {
         const data: Partial<IJob> = {
             title: job.title,
             description: job.description,
-            departmentId: job.departmentId
+            departmentId: job.departmentId,
+            deadline: job.deadline,
         };
         axios
             .post(addJobUrl, data)
@@ -57,9 +58,9 @@ const AddProduct: React.FC = () => {
     return (
         <div className="add-job">
             <h2>Add New job</h2>
-  
 
- 
+
+
             <TextField
                 autoComplete="off"
                 label="description"
@@ -68,7 +69,15 @@ const AddProduct: React.FC = () => {
                 value={job.description}
                 onChange={changeHandler}
             />
- 
+            <TextField
+                autoComplete="off"
+                label="Deadline"
+                placeholder="2023-05-05T00:00:00"
+                variant="outlined"
+                name="deadline"
+                value={job.deadline}
+                onChange={changeHandler}
+            />
             <TextField
                 autoComplete="off"
                 label="Title"

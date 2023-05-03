@@ -9,7 +9,6 @@ namespace Backend.EfCore
 
         [Key]
         public int Id { get; set; }
-        public bool status { get; set; }
         public User User { get; set; }
         public string UserId { get; set; }
         public Job Job { get; set; }

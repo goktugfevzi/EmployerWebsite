@@ -84,8 +84,6 @@
   }
 
   button {
-    background-color: #4CAF50;
-    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -93,8 +91,18 @@
     font-weight: bold;
     padding: 10px 20px;
 
-    &:hover {
-      background-color: #3E8E41;
+    &.complete {
+      background-color: #3e8e41;
+      color: white;
+
+      &:hover {
+        background-color: #4caf50;
+      }
+    }
+
+    &:hover:not(.complete):not(.active) {
+      background-color: #2569;
+      color: white;
     }
   }
 }

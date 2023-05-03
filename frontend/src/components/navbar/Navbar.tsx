@@ -54,16 +54,16 @@ const Navbar: React.FC = () => {
                {currentUser ? (
                   <>
                      <li onClick={toggleNavBar}>
-                        {currentUserRole==="USER"?
-                        <Link to="/user">Profil</Link>
-                        :
-                        <Link to="/admin">Profil</Link>
+                        {currentUserRole === "USER" ?
+                           <Link to="/user">Profil</Link>
+                           :
+                           <Link to="/admin">Profil</Link>
                         }
                      </li>
-                     <li onClick={toggleNavBar}></li>
-                     <Link to="/jobs">İş Takip</Link>
+                     <li onClick={toggleNavBar}>
+                        <Link to="/jobs">İş Takip</Link></li>
                      {currentUserRole[0] === "ADMIN" ? <li onClick={toggleNavBar}>
-                        <Link to="jobs/AddJobs">Staff</Link>
+                        <Link to="/users">Employeer</Link>
                      </li> : null}
                      <li onClick={LogOuttoggleNavBar}>
                         <Link to="/login">Log Out</Link>

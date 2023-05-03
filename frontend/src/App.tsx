@@ -10,6 +10,9 @@ import Login from "./Auth/Login/Login";
 import AuthService from "./services/auth.service";
 import BroadUser from "./pages/Profile/BroadUser";
 import BroadAdmin from "./pages/Profile/BroadAdmin";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import Employee from "./pages/Employee/Employee";
+
 
 const App: React.FC = () => {
 
@@ -48,9 +51,13 @@ const App: React.FC = () => {
                   <Route path="/home" element={<Home />} />
                   <Route path="/admin" element={<BroadAdmin />} />
                   <Route path="/user" element={<BroadUser />} />
+                  <Route path="/change-password" element={<ChangePassword />} />
                   <Route path="/jobs" element={<Jobs />} />
-                  <Route path="/jobs/AddJobs <Routes>" element={<AddJob />} />
+                  <Route path="/jobs/AddJobs" element={<AddJob />} />
                   <Route path="/jobs/Edit/:id" element={<EditJob />} />
+                  <Route path="/users" element={<Employee />} />
+                  {/* <Route path="/users/Addusers" element={<AddJob />} />
+                  <Route path="/users/Edit/:id" element={<EditJob />} /> */}
                </Routes>
                :
                <Routes>
@@ -59,10 +66,12 @@ const App: React.FC = () => {
                   <Route path="/signup" element={<SignUp />} />
                   <Route path="/home" element={<Home />} />
                   <Route path="/admin" element={<BroadAdmin />} />
-                  <Route path="/user" element={<BroadUser />} />
+                  <Route path="/change-password" element={<ChangePassword />} />
                   <Route path="/jobs" element={<Jobs />} />
                   <Route path="/jobs/AddJobs" element={<AddJob />} />
                   <Route path="/jobs/Edit/:id" element={<EditJob />} />
+                  <Route path="/users" element={<Employee />} />
+
                </Routes>
 
             }

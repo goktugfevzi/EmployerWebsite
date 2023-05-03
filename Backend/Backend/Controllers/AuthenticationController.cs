@@ -209,6 +209,17 @@ namespace Backend.Controllers
             var roles = await _userManager.GetRolesAsync(user);
             return Ok(roles);
         }
+        [HttpGet]
+        [Route("getUsers/")]
+        public async Task<IActionResult> getUser()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("user");
+            if (users == null)
+            {
+                return NotFound();
+            }
+            return Ok(users.Select(u => new { u.Id, u.UserName, u.Email ,u.departmentId,u.EmailConfirmed}));
+        }
 
         [HttpGet]
         [Route("getuserByname/{name}")]
@@ -223,9 +234,37 @@ namespace Backend.Controllers
                     Email = user.Email,
                     UserName = user.UserName,
                     departmentId = user.departmentId,
-                    Id =user.Id,
-                    EmailConfirmed= user.EmailConfirmed,
-                    PasswordHash= user.PasswordHash
+                    Id = user.Id,
+                    EmailConfirmed = user.EmailConfirmed,
+                    PasswordHash = user.PasswordHash
+                };
+                if (data == null)
+                {
+                    type = ResponseType.NotFound;
+                }
+                return Ok(ResponseHandler.GetAppResponse(type, data));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ResponseHandler.GetExceptionResponse(ex));
+            }
+        }
+        [HttpGet]
+        [Route("getuserById/{id}")]
+        public IActionResult GetUser(string id)
+        {
+            var user = _db.Users.Where(d => d.Id.Equals(id)).FirstOrDefault();
+            ResponseType type = ResponseType.Success;
+            try
+            {
+                User data = new User()
+                {
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    departmentId = user.departmentId,
+                    Id = user.Id,
+                    EmailConfirmed = user.EmailConfirmed,
+                    PasswordHash = user.PasswordHash
                 };
                 if (data == null)
                 {
@@ -239,7 +278,7 @@ namespace Backend.Controllers
             }
         }
 
-    [HttpPost]
+        [HttpPost]
         [AllowAnonymous]
         [Route("change-password")]
         public async Task<IActionResult> ChangePassword(ChangePassword changePassword)

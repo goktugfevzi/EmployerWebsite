@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import "./Profile.scss";
-import { useNavigate } from "react-router-dom";
-import AuthService from "../../services/auth.service";
 import { IUser } from '../../types/user.type';
+import { useLocation, useNavigate } from "react-router-dom";
+import AuthService from "../../services/auth.service";
+import { Button } from '@mui/material';
+import Swal from "sweetalert2";
 import { IJob } from '../../types/job.type';
 
-interface Job {
-  id: number;
-  name: string;
-  completed: boolean;
-}
-
 const BoardUser: React.FC = () => {
-  const navigate = useNavigate();
   const [jobList, setJobList] = useState<IJob[]>([]);
   const [user, setUser] = useState<IUser | null>(null);
+  const [currentUserRole, setCurrentUserRole] = useState("");
   const [departmentName, setDepartmentName] = useState("");
-
+  const location = useLocation();
+  const redirect = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       const user = AuthService.getCurrentUser();
       if (user) {
-        setUser(user[0]);//(user)
+        setUser(user);//(user)
         const jobList = await AuthService.getUserJob(user.id);
-        setJobList(jobList);
+        const inactiveJobs = jobList.filter((job: IJob) => job.status === false);
+        setJobList(inactiveJobs);
+        if (location?.state) {
+          Swal.fire({
+            icon: "success",
+            title: location?.state?.message,
+          });
+          redirect(location.pathname, { replace: true });
+        }
         if (user.departmentId === 1) {
           setDepartmentName("Yazılım");
         } else if (user.departmentId === 2) {
@@ -37,41 +42,74 @@ const BoardUser: React.FC = () => {
     fetchData();
   }, []);
 
-  const handleJobComplete = (id: string) => {
-    const updatedJobs = jobList.map((job) => {
+  const handleJobComplete = async (id: string) => {
+    const updatedJobs = jobList.map(async (job) => {
       if (job.jobId === id) {
-        job.Deadline = "tamamlandi";
+        if (job.status == true) {
+          job.status = false;
+        } else {
+          job.status = true;
+        }
+        await AuthService.updateJobStatus(id, job.status);
       }
+      window.location.reload();
       return job;
     });
-
-    // assuming you have a function to update the jobs list in the database
-    // updateJobs(updatedJobs);
+    const jobs = await Promise.all(updatedJobs);
+    console.log(jobs);
+    setJobList(jobs);
   };
 
   const handlePasswordReset = () => {
-    // assuming you have a function to reset the user's password
-    // resetPassword(user.email);
+    redirect(`/change-password`);
   };
-
+  console.log(jobList);
   return (
     <div className="Profile">
-      <h1>{user?.email}</h1>
-      <h2>{user?.userName}</h2>
+      <h3>{user?.userName}</h3>
+      <h3>{user?.email}</h3>
       <h3>{departmentName}</h3>
       <button onClick={handlePasswordReset}>Şifre Yenile</button>
-      <h4>Jobs:</h4>
-      <ul>
-        {jobList.map((job) => (
-          <li key={job.jobId}>
-            {job.title}
-            {!job.Deadline && (
-              <button onClick={() => handleJobComplete(job.jobId)}>Tamamla</button>
-            )}
-          </li>
-        ))}
-      </ul>
+      <div className="Jobs">
+        <h1>Jobs:</h1>
+        {jobList.length < 0 ? (
+          <h1>No Jobs</h1>
+        ) : (
+          <div className="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Deadline</th>
 
+                </tr>
+              </thead>
+              <tbody>
+
+                {jobList.map((job) => (
+                  <tr key={job.jobId}>
+                    <td>{job.title}</td>
+                    <td>{job.description}</td>
+                    <td>{job.deadline.slice(0, 10)}</td>
+                    <td>
+                      <Button
+                        variant="contained"
+                        color="error"
+                        sx={{ mx: 3 }}
+                        onClick={() => handleJobComplete(job.jobId)}
+                      >
+                        Tamamla
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

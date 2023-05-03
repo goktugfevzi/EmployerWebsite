@@ -113,18 +113,12 @@ namespace Backend.Model
 
             }
         }
-        public void UpdateJobStatus(int JobID, string status)
+        public void UpdateJobStatus(int JobID, statusDTO statusDTO)
         {
-            bool statusConverted=false;
-            if (status == "true")
-            {
-                statusConverted = true;
-
-            }
             var updatedJob = _context.Jobs.Where(d => d.JobId.Equals(JobID)).FirstOrDefault();
             if (updatedJob != null)
             {
-                updatedJob.Status = statusConverted;
+                updatedJob.Status = statusDTO.status;
                 _context.SaveChanges();
             }
         }

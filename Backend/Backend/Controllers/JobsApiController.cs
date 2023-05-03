@@ -112,15 +112,17 @@ namespace Backend.Controllers
                 return BadRequest(ResponseHandler.GetExceptionResponse(ex));
             }
         }
+
+        // PUT api/<JobsApiController>/5
         [HttpPut]
         [Route("api/[controller]/UpdateJobStatus/{id}")]
-        public IActionResult Put([FromRoute] int id, [FromBody] string Status)
+        public IActionResult Put([FromRoute] int id, [FromBody] statusDTO status)
         {
             try
             {
                 ResponseType type = ResponseType.Success;
-                _db.UpdateJobStatus(id, Status);
-                return Ok(ResponseHandler.GetAppResponse(type, Status));
+                _db.UpdateJobStatus(id, status);
+                return Ok(ResponseHandler.GetAppResponse(type, status));
             }
             catch (Exception ex)
             {
