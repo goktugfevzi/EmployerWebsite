@@ -14,3 +14,4 @@ export const updateJobStatusUrl="http://localhost:5133/api/JobsApi/UpdateJobStat
 export const changePasswordUrl="http://localhost:5133/api/Authentication/change-password";
 export const saveUserJobUrl="http://localhost:5133/api/Admin/saveuserjob";
 export const getUsersUrl="http://localhost:5133/api/Authentication/getUsers";
+export const deleteUserUrl="http://localhost:5133/api/Admin/delete/";

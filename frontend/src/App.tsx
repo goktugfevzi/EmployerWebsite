@@ -12,6 +12,7 @@ import BroadUser from "./pages/Profile/BroadUser";
 import BroadAdmin from "./pages/Profile/BroadAdmin";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import Employee from "./pages/Employee/Employee";
+import AddEmployee from "./pages/AddEmployee/AddEmployee";
 
 
 const App: React.FC = () => {
@@ -56,8 +57,8 @@ const App: React.FC = () => {
                   <Route path="/jobs/AddJobs" element={<AddJob />} />
                   <Route path="/jobs/Edit/:id" element={<EditJob />} />
                   <Route path="/users" element={<Employee />} />
-                  {/* <Route path="/users/Addusers" element={<AddJob />} />
-                  <Route path="/users/Edit/:id" element={<EditJob />} /> */}
+                  <Route path="/users/Addusers" element={<AddEmployee />} />
+                  <Route path="/users/Edit/:id" element={<EditJob />} />
                </Routes>
                :
                <Routes>

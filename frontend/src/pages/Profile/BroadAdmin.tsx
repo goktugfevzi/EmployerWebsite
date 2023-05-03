@@ -82,6 +82,7 @@ const BoardAdmin: React.FC = () => {
                   <th>Title</th>
                   <th>Description</th>
                   <th>Deadline</th>
+                  <th>Process</th>
 
                 </tr>
               </thead>

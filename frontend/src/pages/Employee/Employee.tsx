@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Employee.scss";
 import { Button } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
-import { deleteJobUrl } from "../../constants/url.constants";
+import {  deleteUserUrl } from "../../constants/url.constants";
 import Swal from "sweetalert2";
 import { useNavigate, useLocation } from "react-router-dom";
 import { IUser } from "../../types/user.type";
@@ -44,7 +44,7 @@ const Employee: React.FC = () => {
         const handleDeleteBtnClick = (id: string) => {
                 console.log(id);
                 axios
-                        .delete(`${deleteJobUrl}/${id}`)
+                        .delete(`${deleteUserUrl}${id}`)
                         .then((response) => redirect("/Users", { state: { message: "Users Deleted Successfully" } }))
                         .then(() => window.location.reload())
                         .catch((error) => alert("Error"));
@@ -56,7 +56,7 @@ const Employee: React.FC = () => {
                 redirect(`/Users/edit/${id}`);
         };
         const redirectToAddPage = () => {
-                redirect("/Users/AddUsers");
+                redirect("/users/AddUsers");
         };
 
         // const selectedUsers = async (id: number) => {
@@ -97,7 +97,7 @@ const Employee: React.FC = () => {
                                                                 <tr key={user.id}>
                                                                         <td>{user.userName}</td>
                                                                         <td>{user.email}</td>
-                                                                        <td>{user.emailConfirmed=="false"?<td>No</td>:<td>Yes</td>}</td>
+                                                                        <td>{user.emailConfirmed == "false" ? <td>Yes</td> : <td>No</td>}</td>
                                                                         {user.departmentId === "1" ? <td>Muhasebe</td> : user.departmentId === "2" ? <td>Yazılım</td> : <td>İnsan Kaynakları</td>}
                                                                         <td>
 
@@ -107,7 +107,7 @@ const Employee: React.FC = () => {
                                                                                         sx={{ mx: 3 }}
                                                                                         onClick={() => selectedUsers(user.id)}
                                                                                 ></Button> */}
-                                                                                 <><Button
+                                                                                <><Button
                                                                                         variant="contained"
                                                                                         color="warning"
                                                                                         sx={{ mx: 3 }}
