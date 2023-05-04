@@ -14,7 +14,7 @@ namespace Backend.Model.Authentication
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
 
-        public int department { get; set; }
+        public int departmentId { get; set; }
 
     }
 }

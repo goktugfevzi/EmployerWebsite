@@ -55,7 +55,7 @@ namespace Backend.Controllers
                 Email = registerUser.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = registerUser.Username,
-                department = _db.Departments.FirstOrDefault(d => d.Id.Equals(registerUser.department))
+                department = _db.Departments.FirstOrDefault(d => d.Id.Equals(registerUser.departmentId))
             };
             if (await _roleManager.RoleExistsAsync(role))
             {

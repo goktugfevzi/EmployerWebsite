@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { getUserByIdUrl, updateUserUrl } from "../../constants/url.constants";
+import LoginTextInput from "../../components/LoginTextInput/LoginTextInput";
 
 const EditEmployee: React.FC = () => {
     const [user, setUser] = React.useState<Partial<IUser>>({});
@@ -70,38 +71,13 @@ const EditEmployee: React.FC = () => {
     return (
         <div className="employee">
             <h2>Edit Personnel</h2>
-            <TextField
-                autoComplete="off"
-                label="Email"
-                variant="outlined"
-                name="email"
-                value={user.email}
-                onChange={changeHandler}
+            <LoginTextInput
+                email={user.email}
+                userName={user.userName}
+                changeHandler={changeHandler} 
+                departmenId={user.departmentIdConverted}
+                changeHandlers={changeHandlers}
             />
-            <TextField
-                autoComplete="off"
-                label="UserName"
-                variant="outlined"
-                name="userName"
-                value={user.userName}
-                onChange={changeHandler}
-            />
-            <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                    Department
-                </InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={user.departmentIdConverted || ""}
-                    label="Department"
-                    onChange={changeHandlers}
-                >
-                    <MenuItem value={1}>YAZILIM</MenuItem>
-                    <MenuItem value={2}>MUHASEBE</MenuItem>
-                    <MenuItem value={3}>HR</MenuItem>
-                </Select>
-            </FormControl>
             <div>
                 <Button
                     variant="outlined"

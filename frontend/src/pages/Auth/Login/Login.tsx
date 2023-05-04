@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { IUserLogin } from "../../../types/user.login.type";
 import "../../Auth/Login/Login.scss";
 import { TextField, Button, Typography, Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
+import Swal from "sweetalert2";
 
 const Login: React.FC = () => {
     const redirect = useNavigate();
@@ -12,6 +13,7 @@ const Login: React.FC = () => {
         password: "",
     });
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const location = useLocation();
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({
@@ -34,7 +36,13 @@ const Login: React.FC = () => {
             const userRole = await AuthService.getCurrentUserRole(
                 users.id as string
             );
-
+            if (location?.state) {
+                Swal.fire({
+                    icon: "success",
+                    title: location?.state?.message,
+                });
+                redirect(location.pathname, { replace: true });
+            }
             if (userRole[0] === "ADMIN") {
                 redirect("/admin", {
                     state: { message: "Admin Login Successfully" },
@@ -53,7 +61,7 @@ const Login: React.FC = () => {
     };
 
     const handleBackBtnClick = () => {
-        redirect("signup");
+        redirect("/signup");
     };
     useEffect(() => {
         setTimeout(() => {
@@ -71,7 +79,7 @@ const Login: React.FC = () => {
             <div className="form">
                 <TextField
                     autoComplete="on"
-                    label="Name"
+                    label="UserName"
                     variant="outlined"
                     name="username"
                     value={user.username}

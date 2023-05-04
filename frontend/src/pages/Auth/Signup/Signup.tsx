@@ -14,14 +14,16 @@ import {
 } from "@mui/material";
 import { SignUpUrl } from "../../../constants/url.constants";
 import { useNavigate } from "react-router-dom";
+import LoginTextInput from "../../../components/LoginTextInput/LoginTextInput";
+import { useHandleInputChange } from "../../../components/HandleInputChange/useHandleInputChange";
 
 const SignUp: React.FC = () => {
     const redirect = useNavigate();
     const [user, setUser] = useState<IUserRegister>({
-        username: "",
+        userName: "",
         email: "",
         password: "",
-        department: "",
+        departmentId: "",
     });
     const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -35,24 +37,10 @@ const SignUp: React.FC = () => {
     const changeHandlers = (event: SelectChangeEvent<string>) => {
         setUser({
             ...user,
-            department: event.target.value,
+            departmentId: event.target.value,
         });
     };
-    const handleInputChange = () => {
-        if (
-            user.email === "" ||
-            user.password === "" ||
-            user.username === "" ||
-            user.department === null
-        ) {
-            console.log("karakter gir");
-        }
-        const data: Partial<IUserRegister> = {
-            username: user.username,
-            email: user.email,
-            password: user.password,
-            department: user.department,
-        };
+    const handleInputChange = useHandleInputChange(user, (data) => {
         axios
             .post(SignUpUrl, data)
             .then((resposne) =>
@@ -61,8 +49,7 @@ const SignUp: React.FC = () => {
                 })
             )
             .catch((error) => alert("Error"));
-        setErrorMessage("Kullanıcı adı veya şifre hatalı");
-    };
+    });
 
     return (
         <div className="singup">
@@ -72,21 +59,12 @@ const SignUp: React.FC = () => {
                 </Alert>
             )}
             <div className="form">
-                <TextField
-                    autoComplete="on"
-                    label="Name"
-                    variant="outlined"
-                    name="username"
-                    value={user.username}
-                    onChange={changeHandler}
-                />
-                <TextField
-                    autoComplete="on"
-                    label="Email"
-                    variant="outlined"
-                    name="email"
-                    value={user.email}
-                    onChange={changeHandler}
+                <LoginTextInput
+                    email={user.email}
+                    userName={user.userName}
+                    changeHandler={changeHandler}
+                    departmenId={user.departmentId}
+                    changeHandlers={changeHandlers}
                 />
 
                 <TextField
@@ -97,22 +75,7 @@ const SignUp: React.FC = () => {
                     value={user.password}
                     onChange={changeHandler}
                 />
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">
-                        Department
-                    </InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={user.department}
-                        label="Department"
-                        onChange={changeHandlers}
-                    >
-                        <MenuItem value={1}>YAZILIM</MenuItem>
-                        <MenuItem value={2}>MUHASEBE</MenuItem>
-                        <MenuItem value={3}>HR</MenuItem>
-                    </Select>
-                </FormControl>
+
                 <Button
                     variant="contained"
                     color="primary"

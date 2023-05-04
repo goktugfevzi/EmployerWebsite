@@ -16,7 +16,6 @@ const Employee: React.FC = () => {
     const fetchUsersList = async () => {
         try {
             const response = await AuthService.getUsers();
-
             setUsers(response);
             if (location?.state) {
                 Swal.fire({
