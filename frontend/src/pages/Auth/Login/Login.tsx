@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { IUserLogin } from '../../types/user.login.type';
-import axios from "axios";
-import '../../Auth/Login/Login.scss'
-
-import { TextField, Button, Typography } from "@mui/material";
-import { LogInUrl } from '../../constants/url.constants';
+import React, { useEffect, useState } from "react";
+import { IUserLogin } from "../../../types/user.login.type";
+import "../../Auth/Login/Login.scss";
+import { TextField, Button, Typography, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import AuthService from '../../services/auth.service';
+import AuthService from "../../../services/auth.service";
 
 const Login: React.FC = () => {
-
     const redirect = useNavigate();
     const [user, setUser] = useState<IUserLogin>({
         username: "",
         password: "",
     });
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({
@@ -24,35 +21,40 @@ const Login: React.FC = () => {
     };
     const handleInputChange = async () => {
         if (user.password === "" || user.username === "") {
-            console.log("karakter gir");
+            setErrorMessage("Lütfen kullanıcı adı ve şifre girin.");
+            return;
         }
-        console.log("login çalışıyor");
 
         try {
-            const response = await AuthService.login(user.username, user.password);
-            console.log("ilk the içerisindeyim");
-
+            const response = await AuthService.login(
+                user.username,
+                user.password
+            );
             const users = await AuthService.getCurrentUser();
-            const userRole = await AuthService.getCurrentUserRole(users.id as string);
+            const userRole = await AuthService.getCurrentUserRole(
+                users.id as string
+            );
 
-            console.log("if dışındayim");
             if (userRole[0] === "ADMIN") {
-                console.log("if içindeyim");
-                redirect("/admin", { state: { message: "Admin Login Successfully" } });
+                redirect("/admin", {
+                    state: { message: "Admin Login Successfully" },
+                });
                 document.location.reload();
             } else if (userRole[0] === "USER") {
-                console.log("if içindeyim");
-                redirect("/user", { state: { message: "User Login Successfully" } });
+                redirect("/user", {
+                    state: { message: "User Login Successfully" },
+                });
                 document.location.reload();
             }
         } catch (error) {
             console.error(error);
+            setErrorMessage("Kullanıcı adı veya şifre hatalı");
         }
     };
 
     const handleBackBtnClick = () => {
         redirect("signup");
-    }
+    };
     useEffect(() => {
         setTimeout(() => {
             document.location.reload();
@@ -61,6 +63,11 @@ const Login: React.FC = () => {
 
     return (
         <div className="loginpage">
+            {errorMessage && (
+                <Alert severity="error" onClose={() => setErrorMessage("")}>
+                    {errorMessage}
+                </Alert>
+            )}
             <div className="form">
                 <TextField
                     autoComplete="on"
@@ -78,9 +85,21 @@ const Login: React.FC = () => {
                     value={user.password}
                     onChange={changeHandler}
                 />
-                <Button variant="outlined" color="primary" onClick={handleInputChange}>LOGIN</Button>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleInputChange}
+                >
+                    LOGIN
+                </Button>
 
-                <Typography className="typography-style" onClick={handleBackBtnClick}> Hesabın Yok mu ?</Typography>
+                <Typography
+                    className="typography-style"
+                    onClick={handleBackBtnClick}
+                >
+                    {" "}
+                    Hesabın Yok mu ?
+                </Typography>
             </div>
         </div>
     );

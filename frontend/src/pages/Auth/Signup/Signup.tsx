@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
-import { IUserRegister } from '../../types/user.register.type';
+import React, { useState } from "react";
+import { IUserRegister } from "../../../types/user.register.type";
 import axios from "axios";
-import '../../Auth/Signup/Signup.scss'
-
-import { TextField, Button, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from "@mui/material";
-import { SignUpUrl } from '../../constants/url.constants';
+import "../../Auth/Signup/Signup.scss";
+import {
+    TextField,
+    Button,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    SelectChangeEvent,
+    Alert,
+} from "@mui/material";
+import { SignUpUrl } from "../../../constants/url.constants";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 
 const SignUp: React.FC = () => {
     const redirect = useNavigate();
@@ -16,6 +23,7 @@ const SignUp: React.FC = () => {
         password: "",
         department: "",
     });
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({
@@ -31,24 +39,38 @@ const SignUp: React.FC = () => {
         });
     };
     const handleInputChange = () => {
-        if (user.email === "" || user.password === "" || user.username === "" || user.department === null) {
+        if (
+            user.email === "" ||
+            user.password === "" ||
+            user.username === "" ||
+            user.department === null
+        ) {
             console.log("karakter gir");
         }
         const data: Partial<IUserRegister> = {
-            "username": user.username,
-            "email": user.email,
-            "password": user.password,
-            "department": user.department
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            department: user.department,
         };
         axios
             .post(SignUpUrl, data)
-            .then((resposne) => redirect("/login", { state: { message: "User Created Successfully" } }))
+            .then((resposne) =>
+                redirect("/login", {
+                    state: { message: "User Created Successfully" },
+                })
+            )
             .catch((error) => alert("Error"));
+            setErrorMessage("Kullanıcı adı veya şifre hatalı");
     };
-
 
     return (
         <div className="singup">
+            {errorMessage && (
+                <Alert severity="error" onClose={() => setErrorMessage("")}>
+                    {errorMessage}
+                </Alert>
+            )}
             <div className="form">
                 <TextField
                     autoComplete="on"
@@ -76,7 +98,9 @@ const SignUp: React.FC = () => {
                     onChange={changeHandler}
                 />
                 <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Department</InputLabel>
+                    <InputLabel id="demo-simple-select-label">
+                        Department
+                    </InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -89,7 +113,13 @@ const SignUp: React.FC = () => {
                         <MenuItem value={3}>HR</MenuItem>
                     </Select>
                 </FormControl>
-                <Button variant="outlined" color="primary" onClick={handleInputChange}>SIGN UP</Button>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleInputChange}
+                >
+                    SIGN UP
+                </Button>
             </div>
         </div>
     );

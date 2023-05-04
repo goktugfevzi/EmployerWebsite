@@ -26,7 +26,7 @@ namespace Backend.Model
                 Description = Job.Description,
                 Created = Job.Created,
                 Deadline = Job.Deadline,
-                department = Job.department,
+                departmentId = Job.departmentId,
             }));
             return response;
         }

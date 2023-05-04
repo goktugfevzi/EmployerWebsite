@@ -10,6 +10,7 @@
     {
         Success,
         NotFound,
-        Failure
+        Failure,
+        ValidationError
     }
 }

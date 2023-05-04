@@ -218,9 +218,38 @@ namespace Backend.Controllers
             {
                 return NotFound();
             }
-            return Ok(users.Select(u => new { u.Id, u.UserName, u.Email ,u.departmentId,u.EmailConfirmed}));
+            return Ok(users.Select(u => new { u.Id, u.UserName, u.Email, u.departmentId, u.EmailConfirmed }));
         }
+        [HttpPut]
+        [Route("userupdate/{userId}")]
+        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UserUpdateModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Kullanıcının username ve email'ini değiştirme işlemi
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            user.departmentId = model.departmentId;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                 return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
+        }
         [HttpGet]
         [Route("getuserByname/{name}")]
         public IActionResult Get(string name)

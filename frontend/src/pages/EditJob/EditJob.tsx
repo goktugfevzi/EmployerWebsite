@@ -7,7 +7,7 @@ import axios from "axios";
 import { updateJobUrl, getJobByIdUrl } from "../../constants/url.constants";
 
 const EditJob: React.FC = () => {
-    const [job, setJob] = React.useState<Partial<IJob>>({ departmentIdConverted: "", title: "", description: "" });
+    const [job, setJob] = React.useState<Partial<IJob>>({ departmentIdConverted: "", title: "", description: "", deadline: "", });
     const redirect = useNavigate();
     const { id } = useParams();
 
@@ -25,12 +25,14 @@ const EditJob: React.FC = () => {
     React.useEffect(() => {
         axios.get<IJob>(`${getJobByIdUrl}/${id}`).then((response) =>
             setJob({
-                title: response.data.title,
-                description: response.data.description,
-                deadline: response.data.deadline,
-                departmentId: response.data.departmentId
+                title: response.data.responseData.title,
+                description: response.data.responseData.description,
+                deadline: response.data.responseData.deadline,
+                departmentId: response.data.responseData.departmentId
             })
         );
+            console.log(job);
+
     }, []);
 
 
@@ -91,8 +93,7 @@ const EditJob: React.FC = () => {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={job.departmentIdConverted}
-                    defaultValue={job.departmentId?.toString()}
+                    value={job.departmentIdConverted || ''}
                     label="Department"
                     onChange={changeHandlers}
                 >

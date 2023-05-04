@@ -11,7 +11,7 @@ namespace Backend.Controllers
 {
     //[Authorize(Roles ="ADMIN")]
     [Route("api/[controller]")]
-    [ApiController]   
+    [ApiController]
     public class AdminController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -23,7 +23,7 @@ namespace Backend.Controllers
             passwordHasher = passwordHash;
             _context = context;
         }
-   
+
         [HttpDelete]
         [Route("delete/{id}")]
         public async Task<IActionResult> DeleteUser(string id)
@@ -39,7 +39,7 @@ namespace Backend.Controllers
                 return StatusCode(StatusCodes.Status200OK,
                     new ApiResponse { Code = "Success", Message = $"User deleted {user.UserName} SuccessFully" });
             }
-            foreach(var error in result.Errors)
+            foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
@@ -53,13 +53,23 @@ namespace Backend.Controllers
             try
             {
                 ResponseType type = ResponseType.Success;
+                bool hasJob = _context.UsersJobs.Any(uj => uj.UserId == job.UserId && uj.JobId == job.JobId);
+
+                if (hasJob)
+                {
+                    type = ResponseType.ValidationError;
+                    return Ok(ResponseHandler.GetAppResponse(type, "User already has this job"));
+                }
+
+                // Create new user job and add to context
                 UserJob user = new UserJob();
-                user.UserId=job.UserId;
-                user.JobId=job.JobId;
+                user.UserId = job.UserId;
+                user.JobId = job.JobId;
                 Random random = new Random();
-                user.Id= random.Next();
+                user.Id = random.Next();
                 _context.UsersJobs.Add(user);
                 _context.SaveChanges();
+
                 return Ok(ResponseHandler.GetAppResponse(type, job));
             }
             catch (Exception ex)

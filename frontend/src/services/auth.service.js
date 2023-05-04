@@ -7,6 +7,7 @@ import {
   updateJobUrl,
   getUserRoleUrl,
   getUserJobUrl,
+  getUserByIdUrl,
   updateJobStatusUrl,
   changePasswordUrl,
   saveUserJobUrl,
@@ -117,13 +118,13 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
-const getUserBuId = async (id) => {
+const getUserById = async (id) => {
   if (!id) {
     alert("User not found");
     return;
   }
   try {
-    const response = await axios.get(getDataByName + id);
+    const response = await axios.get(getUserByIdUrl + id);
     console.log(response.data.responseData);
     return response.data.responseData;
   } catch (error) {
@@ -131,7 +132,13 @@ const getUserBuId = async (id) => {
   }
 };
 const getCurrentUserRole = async (id) => {
+
   const response = await axios.get(getUserRoleUrl + id.toString());
+  console.log(response);
+  console.log(response);
+  console.log(response);
+  console.log(response);
+  console.log(response);
   return response.data;
 };
 
@@ -144,7 +151,7 @@ const AuthService = {
   getUserJob,
   updateJobStatus,
   changePassword,
-  getUserBuId,
+  getUserById,
   saveUserJob,
   getUsers,
 };

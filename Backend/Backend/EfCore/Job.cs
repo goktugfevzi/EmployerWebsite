@@ -16,6 +16,7 @@ namespace Backend.EfCore
         public DateTime Created { get; set; }
         public DateTime Deadline { get; set; }
         public Department department { get; set; }
+        public int departmentId { get; set; }
 
     }
 }
