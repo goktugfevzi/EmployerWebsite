@@ -61,7 +61,7 @@ const SignUp: React.FC = () => {
                 })
             )
             .catch((error) => alert("Error"));
-            setErrorMessage("Kullanıcı adı veya şifre hatalı");
+        setErrorMessage("Kullanıcı adı veya şifre hatalı");
     };
 
     return (
@@ -114,7 +114,7 @@ const SignUp: React.FC = () => {
                     </Select>
                 </FormControl>
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     onClick={handleInputChange}
                 >

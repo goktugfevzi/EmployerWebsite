@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
   console.log(currentUser);
   return (
     <div className="navbar">
-      <div className="brand">Discover Your Dream</div>
+      <div className="brand">IOTECH YAZILIM A.Ş.</div>
       <div className="hamburger">
         <Menu onClick={toggleNavBar} />
       </div>
@@ -63,11 +63,11 @@ const Navbar: React.FC = () => {
               </li>
               {currentUserRole[0] === "ADMIN" ? (
                 <li onClick={toggleNavBar}>
-                  <Link to="/users">Employeer</Link>
+                  <Link to="/users">Personel</Link>
                 </li>
               ) : null}
               <li onClick={LogOuttoggleNavBar}>
-                <Link to="/login">Log Out</Link>
+                <Link to="/login">Çıkış</Link>
               </li>
             </>
           ) : null}
@@ -76,6 +76,4 @@ const Navbar: React.FC = () => {
     </div>
   );
 };
-// {/* {currentUserRole[0]==="ADMIN" && <Route path="/admin" element={<BroadAdmin />} />}
-//                   {currentUserRole[0]==="USER" && <Route path="/user" element={<BroadUser />} />}
 export default Navbar;

@@ -11,6 +11,7 @@ import { IUser } from "../../types/user.type";
 import AuthService from "../../services/auth.service";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
+import CustomButton from "../../components/CustomButton/CustomButton";
 
 const Jobs: React.FC = () => {
     const [jobs, setJobs] = useState<IJob[]>([]);
@@ -80,7 +81,7 @@ const Jobs: React.FC = () => {
 
     const selectedJobs = async (id: number) => {
         const response = await AuthService.saveUserJob(currentUser?.id, id);
-        
+
         if (response.name == "AxiosError") {
             console.log(response.message);
             Swal.fire({
@@ -141,40 +142,33 @@ const Jobs: React.FC = () => {
                                     <td>
                                         {currentUserRole[0] === "USER" &&
                                         job.status === false ? (
-                                            <Button
-                                                variant="contained"
-                                                color="warning"
-                                                sx={{ mx: 3 }}
+                                            <CustomButton
+                                                variant="select"
                                                 onClick={() =>
                                                     selectedJobs(job.jobId)
                                                 }
-                                            ></Button>
+                                                text={""}
+                                            />
                                         ) : currentUserRole[0] === "ADMIN" ? (
                                             <>
-                                                <Button
-                                                    variant="contained"
-                                                    color="warning"
-                                                    sx={{ mx: 3 }}
+                                                <CustomButton
+                                                    variant="edit"
                                                     onClick={() =>
                                                         redirectToEditPage(
                                                             job.jobId
                                                         )
                                                     }
-                                                >
-                                                    <Edit />
-                                                </Button>
-                                                <Button
-                                                    variant="contained"
-                                                    color="error"
-                                                    sx={{ mx: 3 }}
+                                                    text={""}
+                                                />
+                                                <CustomButton
+                                                    variant="delete"
                                                     onClick={() =>
                                                         handleDeleteBtnClick(
                                                             job.jobId
                                                         )
                                                     }
-                                                >
-                                                    <Delete />
-                                                </Button>
+                                                    text={""}
+                                                />
                                             </>
                                         ) : null}
                                     </td>

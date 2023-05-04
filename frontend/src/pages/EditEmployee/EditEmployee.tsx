@@ -69,7 +69,7 @@ const EditEmployee: React.FC = () => {
     };
     return (
         <div className="employee">
-            <h2>Edit user</h2>
+            <h2>Edit Personnel</h2>
             <TextField
                 autoComplete="off"
                 label="Email"

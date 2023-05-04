@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   SignUpUrl,
   LogInUrl,
-  SingOutUrl,
   getDataByName,
   updateJobUrl,
   getUserRoleUrl,
@@ -134,11 +133,6 @@ const getUserById = async (id) => {
 const getCurrentUserRole = async (id) => {
 
   const response = await axios.get(getUserRoleUrl + id.toString());
-  console.log(response);
-  console.log(response);
-  console.log(response);
-  console.log(response);
-  console.log(response);
   return response.data;
 };
 
