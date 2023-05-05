@@ -2,16 +2,7 @@ import React, { useState } from "react";
 import { IUserRegister } from "../../../types/user.register.type";
 import axios from "axios";
 import "../../Auth/Signup/Signup.scss";
-import {
-    TextField,
-    Button,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    SelectChangeEvent,
-    Alert,
-} from "@mui/material";
+import { TextField, Button, SelectChangeEvent, Alert } from "@mui/material";
 import { SignUpUrl } from "../../../constants/url.constants";
 import { useNavigate } from "react-router-dom";
 import LoginTextInput from "../../../components/LoginTextInput/LoginTextInput";

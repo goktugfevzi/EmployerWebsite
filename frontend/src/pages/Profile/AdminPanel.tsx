@@ -3,9 +3,7 @@ import "./Profile.scss";
 import { IUser } from "../../types/user.type";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth.service";
-import { Button } from "@mui/material";
 import Swal from "sweetalert2";
-import { IJob } from "../../types/job.type";
 import CustomButton from "../../components/CustomButton/CustomButton";
 
 const BoardAdmin: React.FC = () => {
@@ -26,13 +24,13 @@ const BoardAdmin: React.FC = () => {
                     });
                     redirect(location.pathname, { replace: true });
                 }
-                if (user.departmentId === 1) {
-                    setDepartmentName("Yazılım");
-                } else if (user.departmentId === 2) {
-                    setDepartmentName("IK");
-                } else {
-                    setDepartmentName("Muhasebe");
-                }
+                setDepartmentName(
+                    user.departmentId === 1
+                        ? "Yazılım"
+                        : user.departmentId === 2
+                        ? "Muhasebe"
+                        : "Insan Kaynaklari"
+                );
             }
         };
         fetchData();

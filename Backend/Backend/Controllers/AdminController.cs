@@ -16,12 +16,14 @@ namespace Backend.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly EF_DataContext _context;
+        private readonly DbHelper _db;
         private IPasswordHasher<User> passwordHasher;
         public AdminController(UserManager<User> usrMgr, IPasswordHasher<User> passwordHash, EF_DataContext context)
         {
             _userManager = usrMgr;
             passwordHasher = passwordHash;
             _context = context;
+            _db = new DbHelper(context);
         }
 
         [HttpDelete]
@@ -54,7 +56,13 @@ namespace Backend.Controllers
             {
                 ResponseType type = ResponseType.Success;
                 bool hasJob = _context.UsersJobs.Any(uj => uj.UserId == job.UserId && uj.JobId == job.JobId);
-
+                var dUser = await _userManager.FindByIdAsync(job.UserId);
+                Job dJob = _db.GetJobById(job.JobId);
+                if (dJob.departmentId != dUser.departmentId)
+                {
+                    type = ResponseType.ValidationError;
+                    return Ok(ResponseHandler.GetAppResponse(type, "This job is different with your department"));
+                }
                 if (hasJob)
                 {
                     type = ResponseType.ValidationError;

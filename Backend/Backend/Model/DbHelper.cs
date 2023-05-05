@@ -69,6 +69,7 @@ namespace Backend.Model
                 Created = Job.Created,
                 Deadline = Job.Deadline,
                 department = Job.department,
+                departmentId=Job.departmentId,
 
             };
 
@@ -84,6 +85,7 @@ namespace Backend.Model
             dbTable.Deadline = utcDateTime;
             dbTable.Status = jobModel.Status;
             dbTable.Description = jobModel.Description;
+            dbTable.departmentId = jobModel.DepartmentId;
             dbTable.department = _context.Departments.Where(d => d.Id.Equals(jobModel.DepartmentId)).FirstOrDefault();
             _context.Jobs.Add(dbTable);
             _context.SaveChanges();

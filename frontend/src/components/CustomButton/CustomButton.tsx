@@ -26,7 +26,7 @@ const CustomButton: React.FC<ICustomButtonProps> = ({
             break;
         case "select":
             buttonIcon = <Check />;
-            buttonColor = "info";
+            buttonColor = "secondary";
             break;
     }
 

@@ -88,7 +88,11 @@ const Jobs: React.FC = () => {
                 icon: "error",
                 title: response.message,
             });
-        } else if (response.responseData == "User already has this job") {
+        } else if (
+            response.responseData == "User already has this job" ||
+            response.responseData ==
+                "This job is different with your department"
+        ) {
             Swal.fire({
                 icon: "error",
                 title: response.responseData,
@@ -127,9 +131,9 @@ const Jobs: React.FC = () => {
                                     <td>{job.created.slice(0, 10)}</td>
 
                                     {job.departmentId === 1 ? (
-                                        <td>Muhasebe</td>
-                                    ) : job.departmentId === 2 ? (
                                         <td>Yazılım</td>
+                                    ) : job.departmentId === 2 ? (
+                                        <td>Muhasebe</td>
                                     ) : (
                                         <td>İnsan Kaynakları</td>
                                     )}

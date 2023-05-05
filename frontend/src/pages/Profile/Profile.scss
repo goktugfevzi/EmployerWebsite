@@ -1,108 +1,132 @@
 @import "../../mixins";
 
 .Profile {
-  @include main-style();
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+    @include main-style();
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
 
-  h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
-  }
-
-  .user-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-
-    .label {
-      font-size: 20px;
-      font-weight: bold;
-      margin-right: 10px;
-      width: 150px;
+    h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
     }
 
-    .value {
-      font-size: 20px;
-      flex-grow: 1;
-    }
-  }
+    .User-Info {
+        background-color: #f2f2f2;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
 
-  .job {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f2f2f2;
+        .label {
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 10px;
+            width: 150px;
+        }
 
-    .job-title {
-      font-size: 18px;
-      font-weight: bold;
-      flex-grow: 1;
-      margin-right: 10px;
-    }
+        .value {
+            font-size: 20px;
+            flex-grow: 1;
+        }
+        h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
 
-    .job-actions {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
+        h3 {
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
 
-    .btn-complete {
-      background-color: green;
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 10px;
-
-      &:hover {
-        background-color: darkgreen;
-      }
-    }
-  }
-
-  .btn-change-password {
-    background-color: blue;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-
-    &:hover {
-      background-color: darkblue;
-    }
-  }
-
-  button {
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-
-    &.complete {
-      background-color: #3e8e41;
-      color: white;
-
-      &:hover {
-        background-color: #4caf50;
-      }
+        Button {
+            margin-top: 16px;
+            background-color: #3f51b5;
+            color: #fff;
+            &:hover {
+                background-color: #1a237e;
+            }
+        }
     }
 
-    &:hover:not(.complete):not(.active) {
-      background-color: #2569;
-      color: white;
+    .job {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f2f2f2;
+
+        .job-title {
+            font-size: 18px;
+            font-weight: bold;
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .job-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .btn-complete {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+
+            &:hover {
+                background-color: darkgreen;
+            }
+        }
     }
-  }
+
+    .btn-change-password {
+        background-color: blue;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+
+        &:hover {
+            background-color: darkblue;
+        }
+    }
+
+    button {
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 20px;
+
+        &.complete {
+            background-color: #3e8e41;
+            color: white;
+
+            &:hover {
+                background-color: #4caf50;
+            }
+        }
+
+        &:hover:not(.complete):not(.active) {
+            background-color: #2569;
+            color: white;
+        }
+    }
 }

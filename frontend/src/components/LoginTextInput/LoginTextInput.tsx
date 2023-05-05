@@ -53,7 +53,7 @@ const logintextfield: FC<Props> = ({
                 >
                     <MenuItem value={1}>YAZILIM</MenuItem>
                     <MenuItem value={2}>MUHASEBE</MenuItem>
-                    <MenuItem value={3}>HR</MenuItem>
+                    <MenuItem value={3}>Insan Kaynaklari</MenuItem>
                 </Select>
             </FormControl>
         </div>
