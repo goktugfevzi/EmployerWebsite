@@ -1,5 +1,3 @@
-import internal from "stream";
-
 export interface IUser {
   userName: string;
   responseData:any;

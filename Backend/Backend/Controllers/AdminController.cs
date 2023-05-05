@@ -57,6 +57,7 @@ namespace Backend.Controllers
                 ResponseType type = ResponseType.Success;
                 bool hasJob = _context.UsersJobs.Any(uj => uj.UserId == job.UserId && uj.JobId == job.JobId);
                 var dUser = await _userManager.FindByIdAsync(job.UserId);
+                //var x = _context.Jobs.Where(j=>j.JobId==job.JobId).ToList().FirstOrDefault();
                 Job dJob = _db.GetJobById(job.JobId);
                 if (dJob.departmentId != dUser.departmentId)
                 {
@@ -68,16 +69,16 @@ namespace Backend.Controllers
                     type = ResponseType.ValidationError;
                     return Ok(ResponseHandler.GetAppResponse(type, "User already has this job"));
                 }
-
-                // Create new user job and add to context
                 UserJob user = new UserJob();
                 user.UserId = job.UserId;
                 user.JobId = job.JobId;
                 Random random = new Random();
                 user.Id = random.Next();
                 _context.UsersJobs.Add(user);
+                //x.userId=job.UserId;
+                //_context.Jobs.Update(x);
                 _context.SaveChanges();
-
+                    ;
                 return Ok(ResponseHandler.GetAppResponse(type, job));
             }
             catch (Exception ex)

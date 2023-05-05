@@ -33,6 +33,7 @@ const Login: React.FC = () => {
                 user.password
             );
             const users = await AuthService.getCurrentUser();
+            console.log(users);
             const userRole = await AuthService.getCurrentUserRole(
                 users.id as string
             );
@@ -43,6 +44,12 @@ const Login: React.FC = () => {
                 });
                 redirect(location.pathname, { replace: true });
             }
+            console.log(userRole);
+            console.log(userRole);
+            console.log(userRole);
+            console.log(userRole);
+            console.log(userRole);
+
             if (userRole[0] === "ADMIN") {
                 redirect("/admin", {
                     state: { message: "Admin Login Successfully" },

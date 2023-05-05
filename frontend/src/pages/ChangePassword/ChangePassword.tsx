@@ -19,7 +19,8 @@ const EditJob: React.FC = () => {
         });
     };
     const handleBackBtnClick = () => {
-        redirect("/admin");
+
+        redirect("/user");
     };
 
     const handleSaveBtnClick = async () => {
@@ -41,7 +42,7 @@ const EditJob: React.FC = () => {
                 });
             } else if (response.code == "Success") {
                 console.log(response.message);
-                redirect("/admin", { state: { message: response.message } });
+                redirect("/user", { state: { message: response.message } });
             }
             else if (response.PasswordMismatch) {
                 Swal.fire({

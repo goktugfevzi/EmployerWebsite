@@ -35,7 +35,25 @@ namespace Backend.Controllers
                 return BadRequest(ResponseHandler.GetExceptionResponse(ex));
             }
         }
-
+        [HttpGet]
+        [Route("api/[controller]/GetUserJobs")]
+        public IActionResult GetUserJobs()
+        {
+            ResponseType type = ResponseType.Success;
+            try
+            {
+                IEnumerable<UserJob> data = _db.GetUserJobs();
+                if (!data.Any())
+                {
+                    type = ResponseType.NotFound;
+                }
+                return Ok(ResponseHandler.GetAppResponse(type, data));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ResponseHandler.GetExceptionResponse(ex));
+            }
+        }
 
         [HttpGet]
         [Route("api/[controller]/GetUserjob/{userId}")]

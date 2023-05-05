@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddJob.scss";
-import { TextField, Button, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import {
+    TextField,
+    Button,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    SelectChangeEvent,
+} from "@mui/material";
 import { IJob } from "../../types/job.type";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { addJobUrl } from "../../constants/url.constants";
+import DatePicker from "react-date-picker";
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 
 const AddProduct: React.FC = () => {
-    const [job, setJob] = React.useState<Partial<IJob>>({ departmentIdConverted: "", title: "", description: "" });
+    const [job, setJob] = React.useState<Partial<IJob>>({
+        departmentIdConverted: "",
+        title: "",
+        description: "",
+    });
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const redirect = useNavigate();
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +35,12 @@ const AddProduct: React.FC = () => {
 
     const handleSaveBtnClick = () => {
         console.log(job.departmentIdConverted);
-        if (job.departmentIdConverted === null || job.title === "" || job.description === "" || job.deadline === "") {
+        if (
+            job.departmentIdConverted === null ||
+            job.title === "" ||
+            job.description === "" ||
+            job.deadline === ""
+        ) {
             alert("Enter Values");
             return;
         }
@@ -35,7 +56,11 @@ const AddProduct: React.FC = () => {
         };
         axios
             .post(addJobUrl, data)
-            .then((resposne) => redirect("/jobs", { state: { message: "Job Created Successfully" } }))
+            .then((resposne) =>
+                redirect("/jobs", {
+                    state: { message: "Job Created Successfully" },
+                })
+            )
             .catch((error) => alert("Error"));
     };
 
@@ -54,12 +79,12 @@ const AddProduct: React.FC = () => {
     const handleBackBtnClick = () => {
         redirect("/jobs");
     };
-
+    const handleDateChange = (date: any) => {
+        setSelectedDate(date);
+    };
     return (
         <div className="add-job">
             <h2>Add New job</h2>
-
-
 
             <TextField
                 autoComplete="off"
@@ -69,15 +94,22 @@ const AddProduct: React.FC = () => {
                 value={job.description}
                 onChange={changeHandler}
             />
-            <TextField
-                autoComplete="off"
-                label="Deadline"
-                placeholder="2023-05-05T00:00:00"
-                variant="outlined"
-                name="deadline"
-                value={job.deadline}
-                onChange={changeHandler}
-            />
+
+            <div className="date-picker-container">
+                <label>Deadline: </label>
+                <DatePicker
+                    onChange={(date) => handleDateChange(date)}
+                    value={selectedDate}
+                    
+                    format="dd/MM/yyyy"
+                    calendarAriaLabel="Toggle calendar"
+                    clearAriaLabel="Clear value"
+                    dayAriaLabel="Day"
+                    monthAriaLabel="Month"
+                    yearAriaLabel="Year"
+                    className="date-picker"
+                />
+            </div>
             <TextField
                 autoComplete="off"
                 label="Title"
@@ -87,7 +119,9 @@ const AddProduct: React.FC = () => {
                 onChange={changeHandler}
             />
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Department</InputLabel>
+                <InputLabel id="demo-simple-select-label">
+                    Department
+                </InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -101,10 +135,18 @@ const AddProduct: React.FC = () => {
                 </Select>
             </FormControl>
             <div>
-                <Button variant="outlined" color="primary" onClick={handleSaveBtnClick}>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleSaveBtnClick}
+                >
                     Save
                 </Button>
-                <Button variant="outlined" color="secondary" onClick={handleBackBtnClick}>
+                <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={handleBackBtnClick}
+                >
                     Back
                 </Button>
             </div>

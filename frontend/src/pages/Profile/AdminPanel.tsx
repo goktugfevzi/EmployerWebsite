@@ -6,7 +6,7 @@ import AuthService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import CustomButton from "../../components/CustomButton/CustomButton";
 
-const BoardAdmin: React.FC = () => {
+const AdminPanel: React.FC = () => {
     const [user, setUser] = useState<IUser | null>(null);
     const [departmentName, setDepartmentName] = useState("");
     const location = useLocation();
@@ -41,9 +41,9 @@ const BoardAdmin: React.FC = () => {
     };
     return (
         <div className="Profile">
+            <h1>ADMIN</h1>
             <h3>Name : {user?.userName}</h3>
             <h3>Mail : {user?.email}</h3>
-            <h3>Department Name : {departmentName}</h3>
             <CustomButton
                 variant="edit"
                 text="Şifre Yenile"
@@ -53,4 +53,4 @@ const BoardAdmin: React.FC = () => {
     );
 };
 
-export default BoardAdmin;
+export default AdminPanel;

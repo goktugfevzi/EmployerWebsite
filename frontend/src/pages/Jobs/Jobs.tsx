@@ -12,18 +12,24 @@ import AuthService from "../../services/auth.service";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import { IUserJobs } from "../../types/userJobs.type";
 
 const Jobs: React.FC = () => {
     const [jobs, setJobs] = useState<IJob[]>([]);
     const [currentUser, setCurrentUser] = useState<IUser>();
     const [currentUserRole, setCurrentUserRole] = useState("");
+    const [userJobs, setUserJobs] = useState<IUserJobs[]>([]);
+    const [user, setUser] = useState<IUser[]>([]);
     const location = useLocation();
     const redirect = useNavigate();
-
+    console.log(user);
     const fetchJobsList = async () => {
         try {
             const response = await axios.get(baseUrl);
             setJobs(response.data.responseData);
+            const ujresponse = await AuthService.getUserJobAll();
+            setUserJobs(ujresponse);
+            console.log(ujresponse);
             if (location?.state) {
                 Swal.fire({
                     icon: "success",
@@ -45,20 +51,27 @@ const Jobs: React.FC = () => {
                 setCurrentUserRole(userRole);
             }
         } catch (error) {
-            alert("An Error Happend on fetching..");
+            alert("An Error Happend on fetching...");
         }
     };
 
     useEffect(() => {
         fetchJobsList();
         fetchUserInfo();
-        setTimeout(() => {
-            document.location.reload();
-        }, 300000000);
+        const fetchUser = async (userId: string) => {
+            const response = await AuthService.getUserById(userId);
+            setUser((prevlist) => [...prevlist, response]);
+        };
+        console.log(userJobs);
+        userJobs.forEach((uj) => fetchUser(uj.userId));
+
+        console.log(user);
+        // setTimeout(() => {
+        //     document.location.reload();
+        // }, 300000000);
     }, []);
 
     const handleDeleteBtnClick = (id: number) => {
-        console.log(id);
         axios
             .delete(`${deleteJobUrl}/${id}`)
             .then((response) =>
@@ -71,8 +84,6 @@ const Jobs: React.FC = () => {
     };
 
     const redirectToEditPage = (id: number) => {
-        console.log(id);
-
         redirect(`/jobs/edit/${id}`);
     };
     const redirectToAddPage = () => {
@@ -83,7 +94,6 @@ const Jobs: React.FC = () => {
         const response = await AuthService.saveUserJob(currentUser?.id, id);
 
         if (response.name == "AxiosError") {
-            console.log(response.message);
             Swal.fire({
                 icon: "error",
                 title: response.message,
@@ -101,8 +111,6 @@ const Jobs: React.FC = () => {
             redirect("/user", { state: { message: response.message } });
         }
     };
-    console.log(jobs);
-    console.log(currentUserRole);
     return (
         <div className="Jobs">
             <h1>Jobs List</h1>
@@ -119,6 +127,7 @@ const Jobs: React.FC = () => {
                                 <th>Created</th>
                                 <th>Department</th>
                                 <th>Status</th>
+                                <th>Personel</th>
                                 <th>Process</th>
                             </tr>
                         </thead>
@@ -142,7 +151,20 @@ const Jobs: React.FC = () => {
                                     ) : (
                                         <td>Completed</td>
                                     )}
-
+                                    {userJobs.map((uj) => {
+                                        if (job.jobId === uj.jobId) {
+                                            const matchedUser = user.find(
+                                                (user) => user.id === uj.userId
+                                            );
+                                            return (
+                                                <td key={uj.id}>
+                                                    {matchedUser
+                                                        ? matchedUser.userName
+                                                        : "X"}
+                                                </td>
+                                            );
+                                        }
+                                    })}
                                     <td>
                                         {currentUserRole[0] === "USER" &&
                                         job.status === false ? (

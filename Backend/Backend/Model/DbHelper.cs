@@ -30,6 +30,18 @@ namespace Backend.Model
             }));
             return response;
         }
+        public List<UserJob> GetUserJobs()
+        {
+            List<UserJob> response = new List<UserJob>();
+            var dataList = _context.UsersJobs.ToList();
+            dataList.ForEach(Job => response.Add(new UserJob()
+            {
+                JobId = Job.JobId,
+                UserId = Job.UserId,
+                Id = Job.Id,
+            }));
+            return response;
+        }
 
         public List<UserJobResponse> GetUserJobs(string userId)
         {
@@ -69,7 +81,7 @@ namespace Backend.Model
                 Created = Job.Created,
                 Deadline = Job.Deadline,
                 department = Job.department,
-                departmentId=Job.departmentId,
+                departmentId = Job.departmentId,
 
             };
 

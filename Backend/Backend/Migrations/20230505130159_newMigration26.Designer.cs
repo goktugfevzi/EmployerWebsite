@@ -3,6 +3,7 @@ using System;
 using Backend.EfCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(EF_DataContext))]
-    partial class EF_DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230505130159_newMigration26")]
+    partial class newMigration26
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,14 +219,14 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2c4d2bcd-90b4-443e-b664-e443b875f54b",
+                            Id = "c7808e0f-66f6-4be2-af24-0f7ad7f9157a",
                             ConcurrencyStamp = "1",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8fe4eb46-b5e7-48d5-8e99-daadbd2f61d5",
+                            Id = "d6ab988a-a3e0-4866-931c-7d3904805ce2",
                             ConcurrencyStamp = "2",
                             Name = "USER",
                             NormalizedName = "USER"
