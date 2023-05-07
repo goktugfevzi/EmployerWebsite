@@ -18,7 +18,9 @@
     table {
       width: 100%;
       border-collapse: collapse;
-
+      tr {
+        height: 50px; 
+      }
       th,
       td {
         padding: 0.5rem;
@@ -66,9 +68,8 @@
     }
     .add-icon-btn {
       align-items: center;
-      display:flex;
+      display: flex;
       margin: 0 auto;
-     
     }
   }
 }

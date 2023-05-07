@@ -14,8 +14,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { addJobUrl } from "../../constants/url.constants";
 import DatePicker from "react-date-picker";
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
 
 const AddProduct: React.FC = () => {
     const [job, setJob] = React.useState<Partial<IJob>>({
@@ -100,7 +100,6 @@ const AddProduct: React.FC = () => {
                 <DatePicker
                     onChange={(date) => handleDateChange(date)}
                     value={selectedDate}
-                    
                     format="dd/MM/yyyy"
                     calendarAriaLabel="Toggle calendar"
                     clearAriaLabel="Clear value"

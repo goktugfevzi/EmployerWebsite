@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { Edit, Delete, Check } from "@mui/icons-material";
+import { Edit, Delete, Check, Add } from "@mui/icons-material";
 
 interface ICustomButtonProps {
     variant: "edit" | "delete" | "select";
@@ -25,7 +25,7 @@ const CustomButton: React.FC<ICustomButtonProps> = ({
             buttonColor = "error";
             break;
         case "select":
-            buttonIcon = <Check />;
+            buttonIcon = <Add />;
             buttonColor = "secondary";
             break;
     }
