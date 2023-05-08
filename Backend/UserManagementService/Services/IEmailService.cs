@@ -1,6 +1,4 @@
-﻿
-
-using UserManagementService.Models;
+﻿using UserManagementService.Models;
 
 namespace UserManagementService.Services
 {

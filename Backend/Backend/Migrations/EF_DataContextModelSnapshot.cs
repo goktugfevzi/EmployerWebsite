@@ -84,10 +84,6 @@ namespace Backend.Migrations
                     b.Property<int>("departmentId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("userId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("JobId");
 
                     b.HasIndex("departmentId");
@@ -216,14 +212,14 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2c4d2bcd-90b4-443e-b664-e443b875f54b",
+                            Id = "273dca1f-5549-4c0e-ac97-bbce1b8b1806",
                             ConcurrencyStamp = "1",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8fe4eb46-b5e7-48d5-8e99-daadbd2f61d5",
+                            Id = "842b4ece-7aaf-4733-9668-f1b1eb047520",
                             ConcurrencyStamp = "2",
                             Name = "USER",
                             NormalizedName = "USER"

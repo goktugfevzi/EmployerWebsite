@@ -1,4 +1,5 @@
 using Backend.EfCore;
+using Backend.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

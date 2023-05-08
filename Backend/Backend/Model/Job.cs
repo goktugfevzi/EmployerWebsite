@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using Backend.EfCore;
 
-namespace Backend.EfCore
+namespace Backend.Model
 {
-    //[Table("Job")]
-
     public class Job
     {
         [Key]
@@ -17,7 +14,6 @@ namespace Backend.EfCore
         public DateTime Deadline { get; set; }
         public Department department { get; set; }
         public int departmentId { get; set; }
-        //public string userId { get; set; }= string.Empty;
 
     }
 }

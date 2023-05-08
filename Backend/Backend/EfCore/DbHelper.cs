@@ -1,7 +1,7 @@
-﻿using Backend.EfCore;
+﻿using Backend.Model;
 using Backend.Model.Authentication;
 
-namespace Backend.Model
+namespace Backend.EfCore
 {
     //_context.UsersJobs.Add(new() { JobId = id, UserId = "" });
     //_context.UsersJobs.Where(uj => uj.UserId == "fvz");

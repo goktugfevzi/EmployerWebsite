@@ -13,6 +13,7 @@ namespace UserManagementService.Models
             To.AddRange(to.Select(x => new MailboxAddress("email", x)));
             Subject = subject;
             Content = content;
+
         }
     }
 }

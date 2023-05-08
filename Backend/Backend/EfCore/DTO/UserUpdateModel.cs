@@ -1,4 +1,4 @@
-﻿namespace Backend.EfCore
+﻿namespace Backend.EfCore.DTO
 {
     public class UserUpdateModel
     {

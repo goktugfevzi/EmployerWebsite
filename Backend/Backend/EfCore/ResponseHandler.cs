@@ -1,4 +1,4 @@
-﻿namespace Backend.Model
+﻿namespace Backend.EfCore
 {
     public class ResponseHandler
     {

@@ -1,4 +1,5 @@
 ﻿using Backend.EfCore;
+using Backend.EfCore.DTO;
 using Backend.Model;
 using Backend.Model.Authentication;
 using Microsoft.AspNetCore.Authorization;

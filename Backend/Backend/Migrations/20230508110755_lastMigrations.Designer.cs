@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(EF_DataContext))]
-    [Migration("20230502140950_newMigration")]
-    partial class newMigration
+    [Migration("20230508110755_lastMigrations")]
+    partial class lastMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,9 +178,6 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("status")
-                        .HasColumnType("boolean");
-
                     b.HasKey("Id");
 
                     b.HasIndex("JobId");
@@ -218,14 +215,14 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bc48cfe7-0d75-4675-aa4e-2b04e7878fe4",
+                            Id = "273dca1f-5549-4c0e-ac97-bbce1b8b1806",
                             ConcurrencyStamp = "1",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8c99abd6-4b96-4024-99e1-b3f7ee55a15d",
+                            Id = "842b4ece-7aaf-4733-9668-f1b1eb047520",
                             ConcurrencyStamp = "2",
                             Name = "USER",
                             NormalizedName = "USER"
