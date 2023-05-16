@@ -26,6 +26,31 @@ When the administrator logs into the system, the menu section dynamically update
   - Chose PostgreSql as the database system</br>
 </br>
 
+## Installation
+
+Clone the repository to your local machine.</br>
+```sh
+git clone https://github.com/goktugfevzi/EmployerWebsite.git
+```
+</br></br>
+Install PGAdmin4 and create database account</br></br>
+Create appsettings.json file</br></br>
+Connect DB With Backend</br></br>
+Generate Gmail App key and integrate it into the project</br></br>
+And Run Backend</br>
+```sh
+dotnet run
+```
+Run Frontend</br>
+```sh
+npm i
+```
+</br>
+```sh
+npm start
+```
+</br>
+
 ## Some Screenshots
 
 ![1](https://github.com/goktugfevzi/EmployerWebsite/assets/64567701/2ddbf1d2-36fd-4619-bb35-71a811905242)
@@ -59,26 +84,5 @@ When the administrator logs into the system, the menu section dynamically update
 <p align="center">Confirm Email ScreenShot</p>
 
 
-## Installation
-
-Clone the repository to your local machine.</br>
-```sh
-git clone https://github.com/goktugfevzi/EmployerWebsite.git
-```
-Install PGAdmin4 and create database account</br>
-Create appsettings.json file</br>
-Connect DB With Backend</br>
-Generate Gmail App key and integrate it into the project</br>
-And Run Backend
-```sh
-dotnet run
-```
-Run Frontend
-```sh
-npm i
-```
-```sh
-npm start
-```
 ## License
 Thanks My Mom
