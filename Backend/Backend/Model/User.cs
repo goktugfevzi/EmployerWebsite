@@ -1,6 +1,5 @@
 ﻿using Backend.EfCore;
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Model
@@ -11,8 +10,5 @@ namespace Backend.Model
         [ForeignKey("departmentId")]
         public Department department { get; set; }
         public int departmentId { get; set; }
-
-
-
     }
 }

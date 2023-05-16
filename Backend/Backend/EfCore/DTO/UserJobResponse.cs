@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Backend.EfCore
+﻿namespace Backend.EfCore
 {
     public class UserJobResponse
     {

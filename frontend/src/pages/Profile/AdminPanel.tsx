@@ -8,10 +8,14 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 
 const AdminPanel: React.FC = () => {
     const [user, setUser] = useState<IUser | null>(null);
-    const [departmentName, setDepartmentName] = useState("");
     const location = useLocation();
     const redirect = useNavigate();
-
+    // const handleLoginClick = () => {
+    //     const clientId = "6ad459a7e5c7dc6d7e49af3258d8a9927e88c8315d087724e9886274a3fadf7b";
+    //     const redirectUri = "http://localhost:3000/gitlab";
+    //     const authorizationUrl = `https://gitlab.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
+    //     window.location.href = authorizationUrl;
+    // };
     useEffect(() => {
         const fetchData = async () => {
             const user = AuthService.getCurrentUser();
@@ -24,13 +28,6 @@ const AdminPanel: React.FC = () => {
                     });
                     redirect(location.pathname, { replace: true });
                 }
-                setDepartmentName(
-                    user.departmentId === 1
-                        ? "Yazılım"
-                        : user.departmentId === 2
-                        ? "Muhasebe"
-                        : "Insan Kaynaklari"
-                );
             }
         };
         fetchData();
@@ -49,6 +46,9 @@ const AdminPanel: React.FC = () => {
                 text="Şifre Yenile"
                 onClick={() => handlePasswordReset}
             />
+            {/* <div>
+                <button onClick={handleLoginClick}>Login with GitLab</button>
+            </div> */}
         </div>
     );
 };

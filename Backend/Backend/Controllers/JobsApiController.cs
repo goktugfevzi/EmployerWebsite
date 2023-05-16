@@ -16,7 +16,6 @@ namespace Backend.Controllers
             _db = new DbHelper(eF_DataContext);
         }
 
-        //GET: api/<JobsApiController>
         [HttpGet]
         [Route("api/[controller]/GetJob")]
         public IActionResult Get()

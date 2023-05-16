@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Model.Authentication
+namespace Backend.EfCore.DTO.Authentication
 {
     public class ChangePassword
     {

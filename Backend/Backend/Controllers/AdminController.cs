@@ -51,7 +51,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("saveuserjob")]
-        public async Task<IActionResult> SaveUserJob([FromBody] UserJobDto job)
+        public async Task<IActionResult> SaveUserJob([FromBody] UserJobDTO job)
         {
             try
             {

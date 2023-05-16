@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Backend.EfCore
+﻿namespace Backend.EfCore
 {
     public class JobDTO
     {

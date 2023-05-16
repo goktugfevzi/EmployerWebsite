@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Model.Authentication
+namespace Backend.EfCore.DTO.Authentication
 {
     public class ResetPassword
     {
@@ -14,6 +14,6 @@ namespace Backend.Model.Authentication
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "token is required")]
-        public string? Token { get;set; }
+        public string? Token { get; set; }
     }
 }

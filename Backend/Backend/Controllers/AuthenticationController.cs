@@ -1,7 +1,7 @@
 ﻿using Backend.EfCore;
 using Backend.EfCore.DTO;
+using Backend.EfCore.DTO.Authentication;
 using Backend.Model;
-using Backend.Model.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -223,7 +223,7 @@ namespace Backend.Controllers
         }
         [HttpPut]
         [Route("userupdate/{userId}")]
-        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UserUpdateModel model)
+        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UserUpdateDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -235,8 +235,6 @@ namespace Backend.Controllers
             {
                 return NotFound();
             }
-
-            // Kullanıcının username ve email'ini değiştirme işlemi
             user.UserName = model.UserName;
             user.Email = model.Email;
             user.departmentId = model.departmentId;
@@ -244,7 +242,7 @@ namespace Backend.Controllers
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
-                 return Ok(result);
+                return Ok(result);
             }
             else
             {

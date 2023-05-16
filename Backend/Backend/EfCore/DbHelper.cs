@@ -1,11 +1,7 @@
 ﻿using Backend.Model;
-using Backend.Model.Authentication;
 
 namespace Backend.EfCore
 {
-    //_context.UsersJobs.Add(new() { JobId = id, UserId = "" });
-    //_context.UsersJobs.Where(uj => uj.UserId == "fvz");
-    //_context.UsersJobs.FirstOrDefault(uj => uj.JobId == 1).UserId="22";
     public class DbHelper
     {
         private EF_DataContext _context;
